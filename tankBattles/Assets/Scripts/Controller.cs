@@ -33,6 +33,12 @@ public class Controller : MonoBehaviour
     public GameObject mainCannon;
     float start_angle;
 
+    public GameObject tankLightPosition;
+    public GameObject lightON;
+    public GameObject lightOFF;
+    private bool lightActivated = false;
+
+
 
     void Start()
     {
@@ -52,13 +58,6 @@ public class Controller : MonoBehaviour
     }
     void Update()
     {
-        
-
-
-
-        
-
-
         Vector3 forward = transform.TransformDirection(-Vector3.up) * maxGroundDistance;
         Debug.DrawRay(transform.position + new Vector3(0.0f, 1.0f, 0.0f), forward, Color.green);
 
@@ -158,6 +157,27 @@ public class Controller : MonoBehaviour
             transform.Rotate(0,(turnStrength*Time.deltaTime), 0);
             speedInput = speedInput / 2;
         }
+        //FLASHLIGHT
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (lightActivated)
+            {   
+                Vector3 lightSpawn = new Vector3(tankLightPosition.transform.position.x, tankLightPosition.transform.position.y, tankLightPosition.transform.position.z);
+                GameObject Light = Instantiate(lightOFF, lightSpawn, Quaternion.identity, tankLightPosition.transform);
+                Light.transform.rotation = tankLightPosition.transform.rotation;
+                Destroy(lightON);
+                lightActivated = false;
+
+            }
+            else
+            {
+                Vector3 lightSpawn = new Vector3(tankLightPosition.transform.position.x, tankLightPosition.transform.position.y, tankLightPosition.transform.position.z);
+                GameObject Light = Instantiate(lightON, lightSpawn,Quaternion.identity,tankLightPosition.transform);
+                Light.transform.rotation = tankLightPosition.transform.rotation;
+                Destroy(lightOFF);
+                lightActivated = true;
+            }
+        }
 
         //MAIN CANNON
 
@@ -179,7 +199,10 @@ public class Controller : MonoBehaviour
         { 
             theRB.AddForce(theRB.transform.forward * speedInput);
         }
+
+        
     }
+    
 
     bool IsGrouded()
     {
