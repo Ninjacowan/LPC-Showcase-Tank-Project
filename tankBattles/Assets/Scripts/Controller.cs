@@ -33,10 +33,10 @@ public class Controller : MonoBehaviour
     public GameObject mainCannon;
     float start_angle;
 
-    public GameObject tankLightPosition;
-    public GameObject lightON;
-    public GameObject lightOFF;
-    private bool lightActivated = false;
+    public Light tankLight;
+    private bool lightActivated=false;
+    public Material lightOFF;
+    public Material lightON;
 
 
 
@@ -161,21 +161,16 @@ public class Controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (lightActivated)
-            {   
-                Vector3 lightSpawn = new Vector3(tankLightPosition.transform.position.x, tankLightPosition.transform.position.y, tankLightPosition.transform.position.z);
-                GameObject Light = Instantiate(lightOFF, lightSpawn, Quaternion.identity, tankLightPosition.transform);
-                Light.transform.rotation = tankLightPosition.transform.rotation;
-                Destroy(lightON);
-                lightActivated = false;
-
+            {
+                tankLight.intensity = 0;
+                tankLight.GetComponent<MeshRenderer>().material = lightOFF;
+                lightActivated = !lightActivated;
             }
             else
             {
-                Vector3 lightSpawn = new Vector3(tankLightPosition.transform.position.x, tankLightPosition.transform.position.y, tankLightPosition.transform.position.z);
-                GameObject Light = Instantiate(lightON, lightSpawn,Quaternion.identity,tankLightPosition.transform);
-                Light.transform.rotation = tankLightPosition.transform.rotation;
-                Destroy(lightOFF);
-                lightActivated = true;
+                tankLight.intensity = 10;
+                tankLight.GetComponent<MeshRenderer>().material = lightON;
+                lightActivated = !lightActivated;
             }
         }
 
