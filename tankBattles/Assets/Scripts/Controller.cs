@@ -6,39 +6,47 @@ using UnityEngine;
 public class Controller : MonoBehaviour 
 {
     Rigidbody theRB;
-    public float forwardAccel = 6f, reverseAccel = 6f, maxSpeed = 50f, turnStrength;
-    float DTG;
-    private float speedInput = 0f;
-    Vector2 uvOffset = new Vector2(0.0f, 0.0f);
-    public float maxGroundDistance = 2f;
+    //PUBLIC VARIABLES
+    public float forwardAccel = 6f;
+    public float reverseAccel = 6f;
+    public float maxSpeed = 50f;
     public float TreadRotationRate;
-    float TurretAngle = 0;
-    Vector3 offsetTurret;
-    Transform boneTurretRotation;
-    float maxTurretAngle = 360;
-    float minTurretAngle = -360;
-    float lastFrameTurretAngle;
-    Renderer tredRenderer;
-    Transform boneTurretCannon;
-    public GameObject cameraRotator;
-
+    public float turnStrength;
+    public float maxGroundDistance = 2f;
     public float intialBulletSpeed = 1f;
+    public float turretRotationSpeed = 15f;
+    public float lightIntensity = 10f;
 
+    //PUBLIC OBJECTS
+    public GameObject cameraRotator;
     public GameObject bullet;
-    public GameObject bulltt_spawner;
+    public GameObject bulletSpawner;
     public GameObject bullet_y;
-
-    public float turretRotationSpeed = 15; 
     public GameObject tankTurret;
-    public GameObject mainCannon;
-    float start_angle;
-
     public Light tankLight;
-    private bool lightActivated=false;
+
+    //PUBLIC MATERIALS
     public Material lightOFF;
     public Material lightON;
 
+    //VECTORS
+    Vector2 uvOffset = new Vector2(0.0f, 0.0f);
+    Vector3 offsetTurret;
 
+    //PRIVATE VARIABLES
+    float DTG;
+    float TurretAngle = 0;
+    float maxTurretAngle = 360;
+    float minTurretAngle = -360;
+    float lastFrameTurretAngle;
+    float speedInput = 0f;
+    float start_angle;
+    private bool lightActivated = false;
+
+    //PRIVATE MISCELLANEOUS
+    Transform boneTurretRotation;
+    Renderer tredRenderer;
+    Transform boneTurretCannon;
 
     void Start()
     {
@@ -120,7 +128,7 @@ public class Controller : MonoBehaviour
                 uvOffset += (uvAnimationRate * Time.deltaTime * (var/12));
                 tredRenderer.material.mainTextureOffset = uvOffset;
             }
-            speedInput = Input.GetAxis("Vertical") * forwardAccel * 8000f;
+            speedInput = Input.GetAxis("Vertical") * forwardAccel;
             
         }
         else if (Input.GetAxis("Vertical") < 0 && IsGrouded())
@@ -141,7 +149,7 @@ public class Controller : MonoBehaviour
                 uvOffset += (uvAnimationRate * Time.deltaTime * (var/12));
                 tredRenderer.material.mainTextureOffset = uvOffset;
             }
-            speedInput = Input.GetAxis("Vertical") * reverseAccel * 8000f;
+            speedInput = Input.GetAxis("Vertical") * reverseAccel;
             
         }
 
@@ -164,13 +172,13 @@ public class Controller : MonoBehaviour
             {
                 tankLight.intensity = 0;
                 tankLight.GetComponent<MeshRenderer>().material = lightOFF;
-                lightActivated = !lightActivated;
+                lightActivated = false;
             }
             else
             {
-                tankLight.intensity = 10;
+                tankLight.intensity = lightIntensity;
                 tankLight.GetComponent<MeshRenderer>().material = lightON;
-                lightActivated = !lightActivated;
+                lightActivated = true;
             }
         }
 
@@ -179,10 +187,10 @@ public class Controller : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 spawn = new Vector3(bulltt_spawner.transform.position.x, bullet_y.transform.position.y , bulltt_spawner.transform.position.z);
+            Vector3 spawn = new Vector3(bulletSpawner.transform.position.x, bullet_y.transform.position.y , bulletSpawner.transform.position.z);
             
             GameObject cBullet = Instantiate(bullet, spawn, Quaternion.identity);
-            cBullet.transform.rotation = bulltt_spawner.transform.rotation;
+            cBullet.transform.rotation = bulletSpawner.transform.rotation;
             Rigidbody rig = cBullet.GetComponent<Rigidbody>();
             rig.AddForce(cBullet.transform.forward * intialBulletSpeed);
             
