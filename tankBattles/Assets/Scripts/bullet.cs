@@ -5,6 +5,7 @@ using UnityEngine;
 public class bullet : MonoBehaviour
 {
     public GameObject shell;
+    public GameObject explosionSpawner;
     public float explosiveStrength = 1f;
     public float explosiveRadius = 1f;
     public float upwardsModifier = 1f;
@@ -23,19 +24,14 @@ public class bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
         Vector3 explosionPos = transform.position;
-        Debug.Log("CONTACT");
+        GameObject Explosion = Instantiate(explosionSpawner,explosionPos,Quaternion.identity);
+        Rigidbody rb = Explosion.GetComponent<Rigidbody>();
         rb.AddExplosionForce(explosiveStrength, explosionPos, explosiveRadius, upwardsModifier);
-        Destroy(gameObject,3);
-    }
+        Destroy(Explosion,1f);
+        Destroy(gameObject, 3);
 
-    private void OnCollisionEnter2(Collision collision)
-    {
-        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-        Vector3 explosionPos = transform.position;
-        Debug.Log("CONTACT");
-        rb.AddExplosionForce(explosiveStrength, explosionPos, explosiveRadius, upwardsModifier);
-        Destroy(gameObject,3);
     }
+    
+
 }

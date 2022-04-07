@@ -45,6 +45,7 @@ public class Controller : MonoBehaviour
     float lastFrameTurretAngle;
     float start_angle;
     float yPosition;
+    
     private bool lightActivated = false;
 
     //PRIVATE MISCELLANEOUS
@@ -55,7 +56,7 @@ public class Controller : MonoBehaviour
     void Start()
     {
         
-        tankTitle.text = "test";
+        
 
         intialBulletSpeed = intialBulletSpeed * 1000f;
         Cursor.lockState = CursorLockMode.None;     // set to default default

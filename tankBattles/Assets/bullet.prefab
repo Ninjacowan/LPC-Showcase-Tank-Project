@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shell: {fileID: 3537869567042478696}
+  explosionSpawner: {fileID: 4891872557123425511, guid: 3efbb81ad693ad8499e6b8958885bafc, type: 3}
   explosiveStrength: 1000
   explosiveRadius: 20
   upwardsModifier: 600
