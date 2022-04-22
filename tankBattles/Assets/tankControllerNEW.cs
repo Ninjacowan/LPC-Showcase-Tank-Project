@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Controller : MonoBehaviour 
+public class tankControllerNEW : MonoBehaviour
 {
     Rigidbody theRB;
     //PUBLIC VARIABLES
@@ -18,10 +16,10 @@ public class Controller : MonoBehaviour
     public float intialBulletSpeed = 1f;
     public float turretRotationSpeed = 15f;
     public float lightIntensity = 10f;
-    
+
 
     //PUBLIC OBJECTS
-    public GameObject cameraRotator;
+    public GameObject camera;
     public GameObject bullet;
     public GameObject bulletSpawner;
     public GameObject bullet_y;
@@ -45,7 +43,7 @@ public class Controller : MonoBehaviour
     float lastFrameTurretAngle;
     float start_angle;
     float yPosition;
-    
+
     private bool lightActivated = true;
 
     //PRIVATE MISCELLANEOUS
@@ -55,14 +53,14 @@ public class Controller : MonoBehaviour
 
     void Start()
     {
-        
-        
+
+
 
         intialBulletSpeed = intialBulletSpeed * 1000f;
         Cursor.lockState = CursorLockMode.None;     // set to default default
         Cursor.lockState = CursorLockMode.Confined; // keep confined in the game window
         Cursor.lockState = CursorLockMode.Locked;   // keep confined to center of screen
-        start_angle = cameraRotator.transform.localRotation.eulerAngles.x;
+        
 
 
         theRB = GetComponent<Rigidbody>();
@@ -76,7 +74,7 @@ public class Controller : MonoBehaviour
     void Update()
     {
 
-        
+
 
         //YOU SHOULD KILL YOURSELF, NOW!
 
@@ -103,20 +101,15 @@ public class Controller : MonoBehaviour
             }
             boneTurretRotation.localEulerAngles = new Vector3(offsetTurret.x, offsetTurret.y + TurretAngle, offsetTurret.z);
             lastFrameTurretAngle = TurretAngle;
-            
         }
 
 
 
         //mouse
+        camera.transform.Rotate(theRB.transform.rotation.x, Input.GetAxis("Mouse X") * Time.deltaTime * turretRotationSpeed, theRB.transform.rotation.z);
+        camera.transform.position = new Vector3(theRB.transform.position.x, theRB.transform.position.y+6, theRB.transform.position.z);
         tankTurret.transform.Rotate(0, 0, (Input.GetAxis("Mouse X") * Time.deltaTime * turretRotationSpeed));
 
-        Debug.Log(cameraRotator.transform.localRotation.eulerAngles);
-        if(cameraRotator.transform.localRotation.eulerAngles.x + -Input.GetAxis("Mouse Y") * Time.deltaTime * turretRotationSpeed > start_angle && cameraRotator.transform.localRotation.eulerAngles.x + -Input.GetAxis("Mouse Y") * Time.deltaTime * turretRotationSpeed < start_angle + 70)
-        {
-            cameraRotator.transform.Rotate(-(Input.GetAxis("Mouse Y") * Time.deltaTime * turretRotationSpeed), 0, (Input.GetAxis("Mouse X") * Time.deltaTime * turretRotationSpeed));
-        }
-        
 
         //MAIN BARREL DEPRESSION
 
@@ -125,7 +118,7 @@ public class Controller : MonoBehaviour
 
         TurretAngle = tankTurret.transform.localRotation.eulerAngles.z;
 
-       
+
 
         //MOVEMENT INPUTS
 
@@ -144,18 +137,18 @@ public class Controller : MonoBehaviour
                 {
                     var = theRB.velocity.z;
                 }
-                uvOffset += (uvAnimationRate * Time.deltaTime * (var/12));
+                uvOffset += (uvAnimationRate * Time.deltaTime * (var / 12));
                 tredRenderer.material.mainTextureOffset = uvOffset;
             }
             speedInput = Input.GetAxis("Vertical") * forwardAccel * 100f;
-            
+
         }
         else if (Input.GetAxis("Vertical") < 0 && IsGrouded())
         {
 
             if (tredRenderer.enabled)
             {
-               float var;
+                float var;
                 Vector2 uvAnimationRate = new Vector2(TreadRotationRate, 0.0f);
                 if (theRB.velocity.z < theRB.velocity.x)
                 {
@@ -165,11 +158,11 @@ public class Controller : MonoBehaviour
                 {
                     var = theRB.velocity.x;
                 }
-                uvOffset += (uvAnimationRate * Time.deltaTime * (var/12));
+                uvOffset += (uvAnimationRate * Time.deltaTime * (var / 12));
                 tredRenderer.material.mainTextureOffset = uvOffset;
             }
             speedInput = Input.GetAxis("Vertical") * reverseAccel * 100f;
-            
+
         }
 
         if (yPosition < -5)
@@ -177,16 +170,16 @@ public class Controller : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (Input.GetKey(KeyCode.A) &&  IsGrouded() )
+        if (Input.GetKey(KeyCode.A) && IsGrouded())
         {
-            
-            transform.Rotate(0,(-turnStrength*Time.deltaTime), 0);
+
+            transform.Rotate(0, (-turnStrength * Time.deltaTime), 0);
             speedInput = speedInput / 2;
         }
-        else if (Input.GetKey(KeyCode.D) && IsGrouded() )
+        else if (Input.GetKey(KeyCode.D) && IsGrouded())
         {
-           
-            transform.Rotate(0,(turnStrength*Time.deltaTime), 0);
+
+            transform.Rotate(0, (turnStrength * Time.deltaTime), 0);
             speedInput = speedInput / 2;
         }
         //FLASHLIGHT
@@ -211,13 +204,13 @@ public class Controller : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 spawn = new Vector3(bulletSpawner.transform.position.x, bullet_y.transform.position.y , bulletSpawner.transform.position.z);
-            
+            Vector3 spawn = new Vector3(bulletSpawner.transform.position.x, bullet_y.transform.position.y, bulletSpawner.transform.position.z);
+
             GameObject cBullet = Instantiate(bullet, spawn, Quaternion.identity);
             cBullet.transform.rotation = bulletSpawner.transform.rotation;
             Rigidbody rig = cBullet.GetComponent<Rigidbody>();
             rig.AddForce(cBullet.transform.forward * intialBulletSpeed);
-            
+
         }
 
         if (speedInput > maxSpeed)
@@ -230,17 +223,17 @@ public class Controller : MonoBehaviour
     private void FixedUpdate()
     {
         if (Mathf.Abs(speedInput) > 0 && theRB.velocity.x < 14 && theRB.velocity.z < 14)
-        { 
+        {
             theRB.AddForce(theRB.transform.forward * speedInput);
         }
 
-        
+
     }
-    
+
 
     bool IsGrouded()
     {
         Vector3 offset = new Vector3(0.0f, 1.0f, 0.0f);
-        return Physics.Raycast(transform.position + offset,-Vector3.up,maxGroundDistance);
+        return Physics.Raycast(transform.position + offset, -Vector3.up, maxGroundDistance);
     }
 }
