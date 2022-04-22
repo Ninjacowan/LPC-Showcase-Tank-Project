@@ -12,10 +12,10 @@ public class Turret_Controls : MonoBehaviour
     public float cameraRotation;
     public float turretRotation;
     public float distance;
-    public float L;
-    public float R;
+    public float angleA;
+    public float angleB;
     public string turnDirection = "NONE";
-    
+    public GameObject tar;
 
     // Start is called before the first frame update
     void Start()
@@ -33,15 +33,27 @@ public class Turret_Controls : MonoBehaviour
         cameraRotation = cameraController.transform.rotation.eulerAngles.y;
         turretRotation = turret.transform.rotation.eulerAngles.y;
         distance = cameraRotation - turretRotation;
-        /*if (cameraRotation < turretRotation)
+
+        //STOP
+        /*
+        Transform target = tar.transform;
+        var strength = 1f;
+        Vector3 hold;
+        hold = new Vector3(target.position.x+90 , target.position.y, turret.transform.position.z);
+        var targetRotation = Quaternion.LookRotation(hold - turret.transform.position);
+        var str = Mathf.Min(strength * Time.deltaTime, 1);
+        turret.transform.rotation = Quaternion.Lerp(turret.transform.rotation, targetRotation, str);
+        */
+
+        if (cameraRotation < turretRotation)
         {
-            L = (360 - turretRotation) + cameraRotation;
-            R = turretRotation - cameraRotation;
+            angleA = (360 - turretRotation) + cameraRotation;
+            angleB = turretRotation - cameraRotation;
         }
         else if(cameraRotation > turretRotation) 
         {
-            L = (360 - cameraRotation) + turretRotation;
-            R = cameraRotation - turretRotation;
+            angleA = (360 - cameraRotation) + turretRotation;
+            angleB = cameraRotation - turretRotation;
         }
         
 
@@ -49,14 +61,14 @@ public class Turret_Controls : MonoBehaviour
 
         if (distance > 1 || distance < -1)
         {
-            if (L < R)
+            if (angleA > angleB)
             {
                 turret.transform.Rotate(Time.deltaTime * TurretSpeed, 0, 0);
                 turnDirection = "COUNTER-CLOCKWISE";
             }
-            else if (L > R)
+            else if (angleA < angleB)
             {
-                turret.transform.Rotate(Time.deltaTime * -TurretSpeed, 0, 0);
+                turret.transform.Rotate(Time.deltaTime * TurretSpeed, 0, 0);
                 turnDirection = "CLOCKWISE";
             }
         }
@@ -79,16 +91,5 @@ public class Turret_Controls : MonoBehaviour
         }*/
     }
 
-    Quaternion lookAtSlowly(Transform t, Vector3 target, float speed)
-    {
-
-        //(t) is the gameobject transform
-        //(target) is the location that (t) is going to look at
-        //speed is the quickness of the rotation
-        Transform g = t;
-        Vector3 relativePos = target - g.position;
-        Quaternion toRotation = Quaternion.LookRotation(relativePos) * Quaternion.Inverse(Quaternion.Euler(0, -90, 0));
-        Debug.Log(Quaternion.Lerp(g.rotation, toRotation, speed * Time.deltaTime));
-        return Quaternion.Lerp(g.rotation, toRotation, speed * Time.deltaTime);
-    }
+    
 }
