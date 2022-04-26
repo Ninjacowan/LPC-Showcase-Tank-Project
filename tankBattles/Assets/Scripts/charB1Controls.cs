@@ -2,75 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Controller : MonoBehaviour 
+public class charB1Controls : MonoBehaviour
 {
-    Rigidbody theRB;
-    //PUBLIC VARIABLES
-    public string tankName;
-    public float forwardAccel = 6f;
-    public float reverseAccel = 6f;
-    public float maxSpeed = 50f;
-    public float speedInput = 0f;
-    public float turnStrength;
-    public float TreadRotationRate;
-    public float TurretSpeed;
-    public float maxGroundDistance = 2f;
-    public float intialBulletSpeed = 1f;
-    public float lightIntensity = 10f;
-    public float sensitivity;
-    public float cameraRotation;
-    public float turretRotation;
-    public float distance;
-    public float clockwiseAngle;
-    public float counterClockWiseAngle;
-    public string turnDirection = "NONE";
-
-
-    //PUBLIC OBJECTS
+    #region Game Objects
     public GameObject cameraController;
+    public GameObject cameraY;
+    public GameObject turret;
     public GameObject bullet;
     public GameObject bulletSpawner;
     public GameObject bullet_y;
-    public GameObject turret;
     public Light tankLight;
-    public TextMesh tankTitle;
+    #endregion
 
-    //PUBLIC MATERIALS
+    #region Public Variables
+    public float forwardAccel = 6f;
+    public float reverseAccel = 6f;
+    public float maxSpeed = 50f;
+    public float turnStrength;
+    public float TreadRotationRate = 3f;
+    public float maxGroundDistance = 4f;
+    public float intialBulletSpeed = 1f;
+    public float lightIntensity = 10f;
+    public float TurretSpeed = 1.0f;
+    public float sensitivity = 200.0f;
+    #endregion
+
+    #region Materials
     public Material lightOFF;
     public Material lightON;
+    #endregion
 
-    //VECTORS
-    Vector2 uvOffset = new Vector2(0.0f, 0.0f);
-    Vector3 offsetTurret;
-
-    //PRIVATE VARIABLES
+    #region Private Variables
     float DTG;
-    float TurretAngle = 0;
-    float maxTurretAngle = 360;
-    float minTurretAngle = -360;
-    float lastFrameTurretAngle;
     float start_angle;
     float yPosition;
-    
-    private bool lightActivated = true;
+    private bool lightActivated = false;
 
-    //PRIVATE MISCELLANEOUS
+    private float speedInput = 0f;
+    private float cameraRotation;
+    private float turretRotation;
+    private float distance;
+    private float clockwiseAngle;
+    private float counterClockWiseAngle;
+    #endregion
+
+    #region Vectors
+    Vector2 uvOffset = new Vector2(0.0f, 0.0f);
+    Vector3 offsetTurret;
+    #endregion
+
+    #region Miscellaneous
     Transform boneTurretRotation;
     Renderer tredRenderer;
     Transform boneTurretCannon;
+    Rigidbody theRB;
+    #endregion
 
+
+    // Start is called before the first frame update
     void Start()
     {
-        
-        
-
-        intialBulletSpeed = intialBulletSpeed * 1000f;
         Cursor.lockState = CursorLockMode.None;     // set to default default
         Cursor.lockState = CursorLockMode.Confined; // keep confined in the game window
         Cursor.lockState = CursorLockMode.Locked;   // keep confined to center of screen
-        start_angle = cameraController.transform.localRotation.eulerAngles.x;
-
 
         theRB = GetComponent<Rigidbody>();
         Collider col = GetComponent<CapsuleCollider>();
@@ -79,10 +73,12 @@ public class Controller : MonoBehaviour
         boneTurretRotation = transform.Find("Root/connectBone001/TurretRotate");
         offsetTurret = boneTurretRotation.localEulerAngles;
 
+        start_angle = cameraY.transform.localRotation.eulerAngles.x;
     }
+
+    // Update is called once per frame
     void Update()
     {
-        //RAYCAST GROUNDCHECK
         Vector3 forward = transform.TransformDirection(-Vector3.up) * maxGroundDistance;
         Debug.DrawRay(transform.position + new Vector3(0.0f, 1.0f, 0.0f), forward, Color.green);
 
@@ -92,27 +88,16 @@ public class Controller : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //TURRET ROTATION ANIMATION
-
-        if (TurretAngle != lastFrameTurretAngle)
-        {
-            if (TurretAngle > maxTurretAngle)
-            {
-                TurretAngle = maxTurretAngle;
-            }
-            else if (TurretAngle < minTurretAngle)
-            {
-                TurretAngle = minTurretAngle;
-            }
-            boneTurretRotation.localEulerAngles = new Vector3(offsetTurret.x, offsetTurret.y + TurretAngle, offsetTurret.z);
-            lastFrameTurretAngle = TurretAngle;
-            
-        }
+        #region Turret Rotation
 
 
-
-        //CAMERA AND TURRET MOVEMENT AND ROTATION
-        cameraController.transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity, 0);
+        //cameraY.transform.Rotate(0f, 0f, (Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity));
+        cameraController.transform.Rotate(0f, Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity, 0f);
+        
+        
+        
+        
+        cameraController.transform.position = new Vector3(turret.transform.position.x,turret.transform.position.y+2.5f, turret.transform.position.z);
 
         cameraRotation = cameraController.transform.rotation.eulerAngles.y;
         turretRotation = turret.transform.rotation.eulerAngles.y;
@@ -134,33 +119,21 @@ public class Controller : MonoBehaviour
             if (clockwiseAngle > counterClockWiseAngle)
             {
                 turret.transform.Rotate(Time.deltaTime * TurretSpeed, 0, 0);
-                turnDirection = "COUNTER-CLOCKWISE";
+                
             }
             else if (clockwiseAngle < counterClockWiseAngle)
             {
                 turret.transform.Rotate(Time.deltaTime * -TurretSpeed, 0, 0);
-                turnDirection = "CLOCKWISE";
+                
             }
         }
-        else
-        {
-            turnDirection = "NONE";
-        }
-
-    
-
-
-    //MAIN BARREL DEPRESSION
-
-
-
-
-        TurretAngle = turret.transform.localRotation.eulerAngles.z;
-
+        
        
 
-        //MOVEMENT INPUTS
 
+        #endregion
+
+        #region Movement
         speedInput = 0f;
         if (Input.GetAxis("Vertical") > 0 && IsGrouded())
         {
@@ -176,18 +149,18 @@ public class Controller : MonoBehaviour
                 {
                     var = theRB.velocity.z;
                 }
-                uvOffset += (uvAnimationRate * Time.deltaTime * (var/12));
+                uvOffset += (uvAnimationRate * Time.deltaTime * (var / 12));
                 tredRenderer.material.mainTextureOffset = uvOffset;
             }
             speedInput = Input.GetAxis("Vertical") * forwardAccel * 100f;
-            
+
         }
         else if (Input.GetAxis("Vertical") < 0 && IsGrouded())
         {
 
             if (tredRenderer.enabled)
             {
-               float var;
+                float var;
                 Vector2 uvAnimationRate = new Vector2(TreadRotationRate, 0.0f);
                 if (theRB.velocity.z < theRB.velocity.x)
                 {
@@ -197,11 +170,19 @@ public class Controller : MonoBehaviour
                 {
                     var = theRB.velocity.x;
                 }
-                uvOffset += (uvAnimationRate * Time.deltaTime * (var/12));
+                uvOffset += (uvAnimationRate * Time.deltaTime * (var / 12));
                 tredRenderer.material.mainTextureOffset = uvOffset;
             }
             speedInput = Input.GetAxis("Vertical") * reverseAccel * 100f;
-            
+
+        }
+        if (speedInput > maxSpeed)
+        {
+            speedInput = maxSpeed;
+        }
+        else if (speedInput < -maxSpeed/2)
+        {
+            speedInput = -maxSpeed/2;
         }
 
         if (yPosition < -5)
@@ -209,19 +190,21 @@ public class Controller : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (Input.GetKey(KeyCode.A) &&  IsGrouded() )
+        if (Input.GetKey(KeyCode.A) && IsGrouded())
         {
-            
-            transform.Rotate(0,(-turnStrength*Time.deltaTime), 0);
+
+            transform.Rotate(0, (-turnStrength * Time.deltaTime), 0);
             speedInput = speedInput / 2;
         }
-        else if (Input.GetKey(KeyCode.D) && IsGrouded() )
+        else if (Input.GetKey(KeyCode.D) && IsGrouded())
         {
-           
-            transform.Rotate(0,(turnStrength*Time.deltaTime), 0);
+
+            transform.Rotate(0, (turnStrength * Time.deltaTime), 0);
             speedInput = speedInput / 2;
         }
-        //FLASHLIGHT
+        #endregion
+
+        #region Flashlight
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (lightActivated)
@@ -237,42 +220,36 @@ public class Controller : MonoBehaviour
                 lightActivated = true;
             }
         }
+        #endregion
 
-        //MAIN CANNON
-
-
+        #region Turret Cannon
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 spawn = new Vector3(bulletSpawner.transform.position.x, bullet_y.transform.position.y , bulletSpawner.transform.position.z);
-            
+            Vector3 spawn = new Vector3(bulletSpawner.transform.position.x, bullet_y.transform.position.y, bulletSpawner.transform.position.z);
+
             GameObject cBullet = Instantiate(bullet, spawn, Quaternion.identity);
             cBullet.transform.rotation = bulletSpawner.transform.rotation;
             Rigidbody rig = cBullet.GetComponent<Rigidbody>();
             rig.AddForce(cBullet.transform.forward * intialBulletSpeed);
-            
-        }
 
-        if (speedInput > maxSpeed)
-        {
-            Debug.Log("Speed Maximum");
-            speedInput = maxSpeed;
         }
+        #endregion
+
     }
-
     private void FixedUpdate()
     {
         if (Mathf.Abs(speedInput) > 0 && theRB.velocity.x < 14 && theRB.velocity.z < 14)
-        { 
+        {
             theRB.AddForce(theRB.transform.forward * speedInput);
         }
 
-        
+
     }
-    
+
 
     bool IsGrouded()
     {
         Vector3 offset = new Vector3(0.0f, 1.0f, 0.0f);
-        return Physics.Raycast(transform.position + offset,-Vector3.up,maxGroundDistance);
+        return Physics.Raycast(transform.position + offset, -Vector3.up, maxGroundDistance);
     }
 }
