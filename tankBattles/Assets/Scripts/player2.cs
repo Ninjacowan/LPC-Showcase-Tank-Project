@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class charB1Controls : MonoBehaviour
+public class player2 : MonoBehaviour
 {
     #region Game Objects
     public GameObject cameraController;
@@ -14,8 +14,6 @@ public class charB1Controls : MonoBehaviour
     public Light tankLight;
     public GameObject playerCrosshair;
     public GameObject turretCrosshair;
-    public AudioSource engine;
-    public AudioSource cannon;
     #endregion
 
     #region Public Variables
@@ -43,7 +41,7 @@ public class charB1Controls : MonoBehaviour
     float yPosition;
     private bool lightActivated = false;
 
-    public float speedInput = 0f;
+    private float speedInput = 0f;
     private float cameraRotation;
     private float turretRotation;
     private float distance;
@@ -62,8 +60,6 @@ public class charB1Controls : MonoBehaviour
     Renderer tredRenderer;
     Transform boneTurretCannon;
     Rigidbody theRB;
-    
-    
     #endregion
 
 
@@ -80,7 +76,6 @@ public class charB1Controls : MonoBehaviour
         tredRenderer = GetComponentInChildren<Renderer>();
         boneTurretRotation = transform.Find("Root/connectBone001/TurretRotate");
         offsetTurret = boneTurretRotation.localEulerAngles;
-        
 
         start_angle = cameraY.transform.localRotation.eulerAngles.x;
     }
@@ -102,11 +97,11 @@ public class charB1Controls : MonoBehaviour
 
         //cameraY.transform.Rotate(0f, 0f, (Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity));
         cameraController.transform.Rotate(0f, Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity, 0f);
-        
-        
-        
-        
-        cameraController.transform.position = new Vector3(turret.transform.position.x,turret.transform.position.y+2.4f, turret.transform.position.z);
+
+
+
+
+        cameraController.transform.position = new Vector3(turret.transform.position.x, turret.transform.position.y + 2.5f, turret.transform.position.z);
 
         cameraRotation = cameraController.transform.rotation.eulerAngles.y;
         turretRotation = turret.transform.rotation.eulerAngles.y;
@@ -128,23 +123,23 @@ public class charB1Controls : MonoBehaviour
             if (clockwiseAngle > counterClockWiseAngle)
             {
                 turret.transform.Rotate(Time.deltaTime * TurretSpeed, 0, 0);
-                
+
             }
             else if (clockwiseAngle < counterClockWiseAngle)
             {
                 turret.transform.Rotate(Time.deltaTime * -TurretSpeed, 0, 0);
-                
+
             }
         }
-        
-       
+
+
 
 
         #endregion
 
         #region Movement
         speedInput = 0f;
-        if (Input.GetKey(KeyCode.W) && IsGrouded())
+        if (Input.GetKey(KeyCode.UpArrow) && IsGrouded())
         {
             if (tredRenderer.enabled)
             {
@@ -164,7 +159,7 @@ public class charB1Controls : MonoBehaviour
             speedInput = Input.GetAxis("Vertical") * forwardAccel * 100f;
 
         }
-        else if (Input.GetKey(KeyCode.S) && IsGrouded())
+        else if (Input.GetKey(KeyCode.DownArrow) && IsGrouded())
         {
 
             if (tredRenderer.enabled)
@@ -189,9 +184,9 @@ public class charB1Controls : MonoBehaviour
         {
             speedInput = maxSpeed;
         }
-        else if (speedInput < -maxSpeed/2)
+        else if (speedInput < -maxSpeed / 2)
         {
-            speedInput = -maxSpeed/2;
+            speedInput = -maxSpeed / 2;
         }
 
         if (yPosition < -5)
@@ -199,13 +194,13 @@ public class charB1Controls : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (Input.GetKey(KeyCode.A) && IsGrouded())
+        if (Input.GetKey(KeyCode.LeftArrow) && IsGrouded())
         {
 
             transform.Rotate(0, (-turnStrength * Time.deltaTime), 0);
             speedInput = speedInput / 2;
         }
-        else if (Input.GetKey(KeyCode.D) && IsGrouded())
+        else if (Input.GetKey(KeyCode.RightArrow) && IsGrouded())
         {
 
             transform.Rotate(0, (turnStrength * Time.deltaTime), 0);
@@ -214,7 +209,7 @@ public class charB1Controls : MonoBehaviour
         #endregion
 
         #region Flashlight
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.RightControl))
         {
             if (lightActivated)
             {
@@ -232,11 +227,11 @@ public class charB1Controls : MonoBehaviour
         #endregion
 
         #region Turret Cannon
-        if (Input.GetMouseButtonDown(0)&& Time.time > nextFire)
+        if (Input.GetMouseButtonDown(0) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             Vector3 spawn = new Vector3(bulletSpawner.transform.position.x, bullet_y.transform.position.y, bulletSpawner.transform.position.z);
-            cannon.Play();
+
             GameObject cBullet = Instantiate(bullet, spawn, Quaternion.identity);
             cBullet.transform.rotation = bulletSpawner.transform.rotation;
             Rigidbody rig = cBullet.GetComponent<Rigidbody>();
@@ -246,12 +241,10 @@ public class charB1Controls : MonoBehaviour
         #endregion
 
         #region User Interface
-
-        turretCrosshair.transform.position = new Vector3((-distance*6)+1032,turretCrosshair.transform.position.y,turretCrosshair.transform.position.z);
-        #endregion
         
+        //turretCrosshair.transform.position = new Vector3((-distance*4)+1032,turretCrosshair.transform.position.y,turretCrosshair.transform.position.z);
+        #endregion
 
-        engine.volume = Input.GetAxis("Vertical") + .2f; ;
     }
     private void FixedUpdate()
     {
