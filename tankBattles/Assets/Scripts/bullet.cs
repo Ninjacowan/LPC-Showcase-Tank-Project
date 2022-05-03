@@ -6,6 +6,7 @@ public class bullet : MonoBehaviour
 {
     public GameObject shell;
     public GameObject explosionSpawner;
+    public AudioSource sound;
     public float explosiveStrength = 1f;
     public float explosiveRadius = 1f;
     public float upwardsModifier = 1f;
@@ -28,7 +29,7 @@ public class bullet : MonoBehaviour
         GameObject Explosion = Instantiate(explosionSpawner,explosionPos,Quaternion.identity);
         Rigidbody rb = Explosion.GetComponent<Rigidbody>();
         rb.AddExplosionForce(explosiveStrength, explosionPos, explosiveRadius, upwardsModifier);
-        Destroy(Explosion,1f);
+        Destroy(Explosion,7f);
         Destroy(gameObject, 3);
 
     }

@@ -381,6 +381,7 @@ GameObject:
   - component: {fileID: 6810580444048680530}
   - component: {fileID: 1026213271550981731}
   - component: {fileID: 8375040883194887020}
+  - component: {fileID: 1346882141826733073}
   m_Layer: 0
   m_Name: char_b1
   m_TagString: Untagged
@@ -397,7 +398,7 @@ Transform:
   m_GameObject: {fileID: 1718778460981726589}
   m_LocalRotation: {x: -0, y: -0.017481545, z: -0, w: 0.99984723}
   m_LocalPosition: {x: 11.42, y: 0, z: 9.76}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 968107331702671562}
   - {fileID: 841479009355656625}
@@ -444,7 +445,7 @@ MonoBehaviour:
   cameraController: {fileID: 3420448220712193736}
   cameraY: {fileID: 5187591604351061421}
   turret: {fileID: 76253618393807980}
-  bullet: {fileID: 3537869567042478696, guid: 08d479777541f27409a79fc63920f720, type: 3}
+  Bullet: {fileID: 3537869567042478696, guid: 08d479777541f27409a79fc63920f720, type: 3}
   bulletSpawner: {fileID: 382034019193765240}
   bullet_y: {fileID: 382034019193765240}
   tankLight: {fileID: 453175940898513723}
@@ -452,10 +453,11 @@ MonoBehaviour:
   turretCrosshair: {fileID: 6070935584655691544}
   engine: {fileID: 225777516899555016}
   cannon: {fileID: 3804813794562965483}
-  forwardAccel: 1
-  reverseAccel: 1
-  maxSpeed: 25
-  turnStrength: 20
+  healthUI: {fileID: 3060070769786403921}
+  forwardAccel: 3
+  reverseAccel: 3
+  maxSpeed: 20
+  turnStrength: 13
   TreadRotationRate: 2
   maxGroundDistance: 2
   intialBulletSpeed: 9000
@@ -463,6 +465,8 @@ MonoBehaviour:
   lightIntensity: 10
   TurretSpeed: 40
   sensitivity: 200
+  health: 100
+  damage: 2
   lightOFF: {fileID: 2100000, guid: 92161ecc46cc90e4c8d639fa1cc2356f, type: 2}
   lightON: {fileID: 2100000, guid: d1e28c7e16e644548beef3a9e35dea11, type: 2}
   speedInput: 0
@@ -474,7 +478,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718778460981726589}
   serializedVersion: 2
-  m_Mass: 2
+  m_Mass: 0.75
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -636,6 +640,19 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 0
   m_Center: {x: 0, y: 0.57, z: -2.36}
+--- !u!65 &1346882141826733073
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718778460981726589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.502497, y: 1.2245576, z: 4.9660273}
+  m_Center: {x: -0.021148283, y: 1.1843839, z: -0.39042854}
 --- !u!1 &1883695928224496324
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +745,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1560d948a22e9d49bd1465f809af31f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1983945985405500995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3433155807646411275}
+  - component: {fileID: 3253651140121535416}
+  - component: {fileID: 3060070769786403921}
+  m_Layer: 5
+  m_Name: Health
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3433155807646411275
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983945985405500995}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6975197334487485455}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 99, y: 15}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3253651140121535416
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983945985405500995}
+  m_CullTransparentMesh: 1
+--- !u!114 &3060070769786403921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983945985405500995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 100
 --- !u!1 &3420448220712193736
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +881,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3588311369023397393}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -5.72, y: 1.44, z: -0.1}
+  m_LocalPosition: {x: -3.7, y: 0.76, z: -0.1}
   m_LocalScale: {x: 0.39370057, y: 0.3937006, z: 1.1566132}
   m_Children: []
   m_Father: {fileID: 5983703550710424562}
@@ -1013,7 +1109,7 @@ Light:
   m_Color: {r: 1, g: 0.974124, b: 0.45660377, a: 1}
   m_Intensity: 0
   m_Range: 50
-  m_SpotAngle: 30
+  m_SpotAngle: 61.821396
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -1219,6 +1315,7 @@ RectTransform:
   m_Children:
   - {fileID: 1840442212209340636}
   - {fileID: 1129053504351761281}
+  - {fileID: 3433155807646411275}
   m_Father: {fileID: 7148754734781759125}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1620,6 +1717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8280789476016903653}
+  - component: {fileID: 396284748887241619}
   m_Layer: 0
   m_Name: Ctr_TurretRotate
   m_TagString: Untagged
@@ -1642,6 +1740,20 @@ Transform:
   m_Father: {fileID: 4138139818434261763}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &396284748887241619
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7483724785096638421}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3657205
+  m_Height: 0.73144096
+  m_Direction: 2
+  m_Center: {x: -0.03553006, y: -0.0038829325, z: -0.13}
 --- !u!1 &7594226353432294564
 GameObject:
   m_ObjectHideFlags: 0

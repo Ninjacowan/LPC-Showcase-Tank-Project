@@ -8,7 +8,7 @@ public class charB1Controls : MonoBehaviour
     public GameObject cameraController;
     public GameObject cameraY;
     public GameObject turret;
-    public GameObject bullet;
+    public GameObject Bullet;
     public GameObject bulletSpawner;
     public GameObject bullet_y;
     public Light tankLight;
@@ -16,6 +16,7 @@ public class charB1Controls : MonoBehaviour
     public GameObject turretCrosshair;
     public AudioSource engine;
     public AudioSource cannon;
+    public UnityEngine.UI.Text healthUI; 
     #endregion
 
     #region Public Variables
@@ -30,6 +31,8 @@ public class charB1Controls : MonoBehaviour
     public float lightIntensity = 10f;
     public float TurretSpeed = 1.0f;
     public float sensitivity = 200.0f;
+    public float health = 100;
+    public float damage;
     #endregion
 
     #region Materials
@@ -62,6 +65,7 @@ public class charB1Controls : MonoBehaviour
     Renderer tredRenderer;
     Transform boneTurretCannon;
     Rigidbody theRB;
+    TextEditor textEditor;
     
     
     #endregion
@@ -80,8 +84,6 @@ public class charB1Controls : MonoBehaviour
         tredRenderer = GetComponentInChildren<Renderer>();
         boneTurretRotation = transform.Find("Root/connectBone001/TurretRotate");
         offsetTurret = boneTurretRotation.localEulerAngles;
-        
-
         start_angle = cameraY.transform.localRotation.eulerAngles.x;
     }
 
@@ -189,9 +191,9 @@ public class charB1Controls : MonoBehaviour
         {
             speedInput = maxSpeed;
         }
-        else if (speedInput < -maxSpeed/2)
+        else if (speedInput < -maxSpeed/1.1)
         {
-            speedInput = -maxSpeed/2;
+            speedInput = -maxSpeed/1.1f;
         }
 
         if (yPosition < -5)
@@ -204,12 +206,14 @@ public class charB1Controls : MonoBehaviour
 
             transform.Rotate(0, (-turnStrength * Time.deltaTime), 0);
             speedInput = speedInput / 2;
+            
         }
         else if (Input.GetKey(KeyCode.D) && IsGrouded())
         {
 
             transform.Rotate(0, (turnStrength * Time.deltaTime), 0);
             speedInput = speedInput / 2;
+            
         }
         #endregion
 
@@ -237,7 +241,7 @@ public class charB1Controls : MonoBehaviour
             nextFire = Time.time + fireRate;
             Vector3 spawn = new Vector3(bulletSpawner.transform.position.x, bullet_y.transform.position.y, bulletSpawner.transform.position.z);
             cannon.Play();
-            GameObject cBullet = Instantiate(bullet, spawn, Quaternion.identity);
+            GameObject cBullet = Instantiate(Bullet, spawn, Quaternion.identity);
             cBullet.transform.rotation = bulletSpawner.transform.rotation;
             Rigidbody rig = cBullet.GetComponent<Rigidbody>();
             rig.AddForce(cBullet.transform.forward * intialBulletSpeed);
@@ -247,11 +251,17 @@ public class charB1Controls : MonoBehaviour
 
         #region User Interface
 
-        turretCrosshair.transform.position = new Vector3((-distance*6)+1032,turretCrosshair.transform.position.y,turretCrosshair.transform.position.z);
+        turretCrosshair.transform.position = new Vector3((-distance*6)+786,turretCrosshair.transform.position.y,turretCrosshair.transform.position.z);
         #endregion
         
+        
 
-        engine.volume = Input.GetAxis("Vertical") + .2f; ;
+        engine.volume = Mathf.Abs(Input.GetAxis("Vertical")) + .2f; ;
+        if(engine.volume > .70)
+        {
+            engine.volume = .70f;
+        }
+
     }
     private void FixedUpdate()
     {
@@ -259,6 +269,11 @@ public class charB1Controls : MonoBehaviour
         {
             theRB.AddForce(theRB.transform.forward * speedInput);
         }
+        else
+        {
+            
+        }
+        healthUI.text = health.ToString();
 
 
     }
@@ -269,4 +284,17 @@ public class charB1Controls : MonoBehaviour
         Vector3 offset = new Vector3(0.0f, 1.0f, 0.0f);
         return Physics.Raycast(transform.position + offset, -Vector3.up, maxGroundDistance);
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+
+     
+        if (collision.gameObject.name == "bullet")
+        {
+            health = health-damage;
+
+        }
+        
+    }
+
+
 }
