@@ -30,7 +30,7 @@ public class bullet : MonoBehaviour
         Rigidbody rb = Explosion.GetComponent<Rigidbody>();
         rb.AddExplosionForce(explosiveStrength, explosionPos, explosiveRadius, upwardsModifier);
         Destroy(Explosion,7f);
-        Destroy(gameObject, 3);
+        Destroy(gameObject);
 
     }
     
