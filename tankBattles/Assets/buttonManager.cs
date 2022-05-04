@@ -11,31 +11,44 @@ public class buttonManager : MonoBehaviour
     public Button startButton;
     public Button exitButton;
     public Button settingsButton;
-    public Button backButton;
+    public Button backSettingsButton;
+    public Button backPlayButton;
     #endregion
 
     #region Positions
     public Transform mainPosition;
     public Transform playPosition;
     public Transform settingsPosition;
-    public Transform tempPos;
     public float cameraSpeed = 1.0f;
     #endregion
 
     #region Private
     private float startTime;
-    public float journeyLength;
-    public float distanceCovered;
-    public float fractionOfJourney;
-    public bool startButtonSelected;
-    public bool exitButtonSelected;
-    public bool settingsButtonSelected;
-    public bool backButtonSelected;
+    private float journeyLength;
+    private float distanceCovered;
+    private float fractionOfJourney;
+    private bool startButtonSelected;
+    private bool exitButtonSelected;
+    private bool settingsButtonSelected;
+    private bool backSettingsButtonSelected;
+    private bool backPlayButtonSelected;
+
+    private GameObject temp1;
+    private GameObject temp2;
+    private GameObject temp3;
+    private GameObject temp4;
+    private GameObject temp5;
     #endregion
-    public float distance;
+    
     void Start()
     {
-        
+        temp1 = GameObject.Find("startButton");
+        temp2 = GameObject.Find("settingsButton");
+        temp3 = GameObject.Find("exitButton");
+        temp4 = GameObject.Find("backButtonSettings");
+        temp5 = GameObject.Find("backButtonPlay");
+        temp4.SetActive(false);
+        temp5.SetActive(false);
     }
 
     
@@ -43,11 +56,13 @@ public class buttonManager : MonoBehaviour
     {
         startButton.onClick.AddListener(startTask);
         settingsButton.onClick.AddListener(settingsTask);
-        backButton.onClick.AddListener(backTask);
+        backSettingsButton.onClick.AddListener(backTaskS);
         exitButton.onClick.AddListener(endTask);
+        backPlayButton.onClick.AddListener(backTaskP);
 
         if (startButtonSelected)
         {
+
             distanceCovered = (Time.time - startTime) * cameraSpeed;
             fractionOfJourney = distanceCovered / journeyLength;
             mainCamera.transform.position = Vector3.Lerp(mainPosition.position, playPosition.position, fractionOfJourney);
@@ -55,9 +70,7 @@ public class buttonManager : MonoBehaviour
             if(distanceCovered > journeyLength)
             {
                 startButtonSelected = false;
-                distanceCovered = 0;
-                journeyLength = 0;
-                fractionOfJourney = 0;
+                playButtons(true);
             }
         }
         else if (settingsButtonSelected)
@@ -69,18 +82,31 @@ public class buttonManager : MonoBehaviour
             if (distanceCovered > journeyLength)
             {
                 settingsButtonSelected = false;
+                settingsButtons(true);
             }
         }
-        else if (backButtonSelected)
+        else if (backSettingsButtonSelected)
         {
             distanceCovered = (Time.time - startTime) * cameraSpeed;
             fractionOfJourney = distanceCovered / journeyLength;
-            mainCamera.transform.position = Vector3.Lerp(tempPos.transform.position, mainPosition.position, fractionOfJourney);
-            mainCamera.transform.rotation = Quaternion.Lerp(tempPos.transform.rotation, mainPosition.rotation, fractionOfJourney);
+            mainCamera.transform.position = Vector3.Lerp(settingsPosition.position, mainPosition.position, fractionOfJourney);
+            mainCamera.transform.rotation = Quaternion.Lerp(settingsPosition.rotation, mainPosition.rotation, fractionOfJourney);
             if (distanceCovered > journeyLength)
             {
-                backButtonSelected = false;
-                tempPos = null;
+                backSettingsButtonSelected = false;
+                mainButtons(true);
+            }
+        }
+        else if (backPlayButtonSelected)
+        {
+            distanceCovered = (Time.time - startTime) * cameraSpeed;
+            fractionOfJourney = distanceCovered / journeyLength;
+            mainCamera.transform.position = Vector3.Lerp(playPosition.position, mainPosition.position, fractionOfJourney);
+            mainCamera.transform.rotation = Quaternion.Lerp(playPosition.rotation, mainPosition.rotation, fractionOfJourney);
+            if (distanceCovered > journeyLength)
+            {
+                backPlayButtonSelected = false;
+                mainButtons(true);
             }
         }
         else if (exitButtonSelected)
@@ -94,22 +120,46 @@ public class buttonManager : MonoBehaviour
         startButtonSelected = true;
         startTime = Time.time;
         journeyLength = Vector3.Distance(mainPosition.position, playPosition.position);
+        mainButtons(false);
     }
     void settingsTask()
     {
         settingsButtonSelected = true;
         startTime = Time.time;
         journeyLength = Vector3.Distance(mainPosition.position, settingsPosition.position);
+        mainButtons(false);
     }
-    void backTask()
+    void backTaskS()
     {
-        tempPos = mainCamera.transform;
-        backButtonSelected = true;
+        backSettingsButtonSelected = true;
         startTime = Time.time;
-        journeyLength = Vector3.Distance(tempPos.position, playPosition.position);
+        journeyLength = Vector3.Distance(settingsPosition.position, mainPosition.position);
+        settingsButtons(false);
+    }
+    void backTaskP()
+    {
+        backPlayButtonSelected = true;
+        startTime= Time.time;
+        journeyLength = Vector3.Distance(playPosition.position, mainPosition.position);
+        playButtons(false);
     }
     void endTask()
     {
         
     }
+    void mainButtons(bool val)
+    {
+        temp1.SetActive(val);
+        temp2.SetActive(val);
+        temp3.SetActive(val);
+    }
+    void playButtons(bool val)
+    {
+        temp5.SetActive(val);
+    }
+    void settingsButtons(bool val)
+    {
+        temp4.SetActive(val);
+    }
 }
+
