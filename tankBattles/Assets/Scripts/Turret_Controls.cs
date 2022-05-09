@@ -19,6 +19,7 @@ public class Turret_Controls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         Cursor.lockState = CursorLockMode.None;     // set to default default
         Cursor.lockState = CursorLockMode.Confined; // keep confined in the game window
         Cursor.lockState = CursorLockMode.Locked;   // keep confined to center of screen
@@ -29,10 +30,23 @@ public class Turret_Controls : MonoBehaviour
     {
         cameraController.transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity, 0);
          
-        cameraRotation = cameraController.transform.rotation.eulerAngles.y;
-        turretRotation = turret.transform.rotation.eulerAngles.y;
-        distance = cameraRotation - turretRotation;
+        //cameraRotation = cameraController.transform.rotation.eulerAngles.y;
+        //turretRotation = turret.transform.rotation.eulerAngles.y;
+        //distance = cameraRotation - turretRotation;
 
+<<<<<<< Updated upstream:tankBattles/Assets/Scripts/Turret_Controls.cs
+=======
+        //STOP
+        
+        Transform target = tar.transform;
+
+        turret.transform.LookAt(target);
+        Vector3 a = turret.transform.localEulerAngles;
+        turret.transform.localEulerAngles = new Vector3 (a.x-90, a.y+90, 0);
+        
+        /*
+
+>>>>>>> Stashed changes:tankBattles/Assets/Turret_Controls.cs
         if (cameraRotation < turretRotation)
         {
             clockwiseAngle = (360 - turretRotation) + cameraRotation;

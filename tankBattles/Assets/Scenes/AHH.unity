@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,7 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
 --- !u!1 &474424416
+=======
+--- !u!1 &236626725
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,6 +135,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   - component: {fileID: 474424421}
   - component: {fileID: 474424420}
   - component: {fileID: 474424419}
@@ -138,11 +143,18 @@ GameObject:
   - component: {fileID: 474424417}
   m_Layer: 0
   m_Name: Light Bulb
+=======
+  - component: {fileID: 236626727}
+  - component: {fileID: 236626726}
+  m_Layer: 0
+  m_Name: Spot Light
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
 --- !u!108 &474424417
 Light:
   m_ObjectHideFlags: 0
@@ -220,21 +232,64 @@ SphereCollider:
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &474424419
 MeshRenderer:
+=======
+--- !u!108 &236626726
+Light:
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   m_GameObject: {fileID: 474424416}
+=======
+  m_GameObject: {fileID: 236626725}
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 10.49
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_RenderingLayerMask: 1
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 92161ecc46cc90e4c8d639fa1cc2356f, type: 2}
@@ -261,10 +316,26 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &474424420
 MeshFilter:
+=======
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 2.62
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &236626727
+Transform:
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   m_GameObject: {fileID: 474424416}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &474424421
@@ -281,6 +352,16 @@ Transform:
   m_Father: {fileID: 197315481827692770}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  m_GameObject: {fileID: 236626725}
+  m_LocalRotation: {x: 0.62570643, y: 0.32938048, z: 0.32938048, w: 0.62570643}
+  m_LocalPosition: {x: 1.77, y: 8.516, z: 2.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 34.474, y: 90, z: 90}
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
 --- !u!1 &514562310
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +438,172 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
 --- !u!1 &811399206
+=======
+--- !u!4 &671253219 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+  m_PrefabInstance: {fileID: 708411713}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &708411713
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 961156484}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3403908
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.865617
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.99
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.652669
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+      propertyPath: m_Name
+      value: gauge
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f36d778f92f7e44d92b1edb1e47becb, type: 3}
+--- !u!1 &725541458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 725541462}
+  - component: {fileID: 725541461}
+  - component: {fileID: 725541460}
+  - component: {fileID: 725541459}
+  m_Layer: 0
+  m_Name: new bone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &725541459
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725541458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &725541460
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725541458}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &725541461
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725541458}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &725541462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725541458}
+  m_LocalRotation: {x: -0, y: 0.6335824, z: -0, w: 0.77367526}
+  m_LocalPosition: {x: 18.75, y: 4.19, z: 7.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 78.63, z: 0}
+--- !u!1 &961156480
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -497,11 +743,20 @@ Transform:
   m_LocalPosition: {x: 11.152716, y: 4.18, z: 11.169246}
   m_LocalScale: {x: 5.0800014, y: 5.0800023, z: 5.080002}
   m_Children:
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   - {fileID: 1958185509}
+=======
+  - {fileID: 1083008869}
+  - {fileID: 671253219}
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
 --- !u!1 &1958185505
+=======
+--- !u!1 &1018894199
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -509,23 +764,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   - component: {fileID: 1958185509}
   - component: {fileID: 1958185508}
   - component: {fileID: 1958185507}
   - component: {fileID: 1958185506}
   m_Layer: 0
   m_Name: Camera Y
+=======
+  - component: {fileID: 1018894200}
+  - component: {fileID: 1018894203}
+  - component: {fileID: 1018894202}
+  m_Layer: 0
+  m_Name: tube
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
 --- !u!65 &1958185506
 BoxCollider:
+=======
+--- !u!4 &1018894200
+Transform:
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   m_GameObject: {fileID: 1958185505}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -534,6 +803,84 @@ BoxCollider:
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1958185507
+=======
+  m_GameObject: {fileID: 1018894199}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.2808508, y: -0.0042238715, z: 0.31189945}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1037078031}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1018894202
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018894199}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 90156e3cd81733e43b52e10113f06a7e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1018894203
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018894199}
+  m_Mesh: {fileID: 4300004, guid: 20a4188340dcbe34fb937fada69ebd92, type: 3}
+--- !u!1 &1037078027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1037078031}
+  - component: {fileID: 1037078030}
+  - component: {fileID: 1037078029}
+  m_Layer: 0
+  m_Name: temp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1037078029
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -552,7 +899,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 49293d1da7e26b845b39c24f9831eaba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -580,9 +927,48 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   m_GameObject: {fileID: 1958185505}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1958185509
+=======
+  m_GameObject: {fileID: 1037078027}
+  m_Mesh: {fileID: 4300002, guid: 20a4188340dcbe34fb937fada69ebd92, type: 3}
+--- !u!4 &1037078031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037078027}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 19.77, y: 1.34, z: 7.07}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_Children:
+  - {fileID: 1018894200}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!1 &1083008868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1083008869}
+  - component: {fileID: 1083008871}
+  - component: {fileID: 1083008870}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1083008869
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -764,6 +1150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bec4ba882ce9cb4085a53e2525cc0f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   cameraController: {fileID: 1616170162}
   cameraY: {fileID: 1958185505}
   turret: {fileID: 197315481827396820}
@@ -783,6 +1170,19 @@ MonoBehaviour:
   sensitivity: 200
   lightOFF: {fileID: 2100000, guid: 92161ecc46cc90e4c8d639fa1cc2356f, type: 2}
   lightON: {fileID: 2100000, guid: d1e28c7e16e644548beef3a9e35dea11, type: 2}
+=======
+  cameraController: {fileID: 961156480}
+  turret: {fileID: 1037078027}
+  TurretSpeed: 30
+  sensitivity: 200
+  cameraRotation: 0
+  turretRotation: 0
+  distance: 0
+  angleA: 0
+  angleB: 0
+  turnDirection: NONE
+  tar: {fileID: 0}
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
 --- !u!1 &197315481827396804
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,6 +1383,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
 --- !u!136 &197315481827396817
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1028,6 +1429,8 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 0
   m_Center: {x: 0, y: 0.35, z: -0.57}
+=======
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
 --- !u!1 &197315481827396820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,6 +1537,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
 --- !u!136 &197315481827396827
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1165,6 +1569,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+=======
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
 --- !u!1 &197315481827396830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,20 +1623,31 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197315481827396802}
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   m_LocalRotation: {x: -0, y: -0.017481545, z: -0, w: 0.99984723}
   m_LocalPosition: {x: 11.42, y: 0, z: 9.76}
+=======
+  m_LocalRotation: {x: -0.010613046, y: -0.70702714, z: -0.010613048, w: 0.70702714}
+  m_LocalPosition: {x: 19.90598, y: 0.011413813, z: 7.367323}
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 197315481827692778}
   - {fileID: 197315481827692776}
   - {fileID: 197315481827692772}
   - {fileID: 197315481827692798}
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   - {fileID: 197315481827692796}
   - {fileID: 197315481827692786}
   - {fileID: 474424421}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -2.003, z: 0}
+=======
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -1.72, y: -90, z: 0}
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
 --- !u!4 &197315481827692772
 Transform:
   m_ObjectHideFlags: 0
@@ -1310,7 +1727,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197315481827396814}
-  m_LocalRotation: {x: 0.6815217, y: -0.117932506, z: -0.19395766, w: 0.6957015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.0057783, y: 0.00000022888183, z: 0.0000001347065}
   m_LocalScale: {x: 0.9999996, y: 0.9999999, z: 1.0000001}
   m_Children:
@@ -1333,20 +1750,6 @@ Transform:
   m_Father: {fileID: 197315481827692746}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &197315481827692786
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197315481827396818}
-  m_LocalRotation: {x: 0.0000000040274797, y: 0.0000000040274797, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 7.740251, y: 7.74025, z: 7.655847}
-  m_Children: []
-  m_Father: {fileID: 197315481827692770}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &197315481827692788
 Transform:
   m_ObjectHideFlags: 0
@@ -1354,8 +1757,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197315481827396820}
+<<<<<<< Updated upstream:tankBattles/Assets/Scenes/AHH.unity
   m_LocalRotation: {x: 0.023436688, y: 0.036788233, z: 0.5367882, w: 0.8425888}
   m_LocalPosition: {x: -0.408, y: -0.222, z: 0.087}
+=======
+  m_LocalRotation: {x: 0, y: 0, z: 0.53729963, w: 0.8433915}
+  m_LocalPosition: {x: -0.40800023, y: -0.22199985, z: 0.08700006}
+>>>>>>> Stashed changes:tankBattles/Assets/AHH.unity
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 197315481827692746}
@@ -1406,20 +1814,6 @@ Transform:
   m_Father: {fileID: 197315481827692772}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &197315481827692796
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197315481827396828}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00089263916, y: 0.0018558502, z: -0.0049242973}
-  m_LocalScale: {x: 6.605515, y: 7.6804075, z: 7.6804075}
-  m_Children: []
-  m_Father: {fileID: 197315481827692770}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &197315481827692798
 Transform:
   m_ObjectHideFlags: 0
@@ -1427,7 +1821,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197315481827396830}
-  m_LocalRotation: {x: -0.65059954, y: 0.16303498, z: 0.7266237, w: -0.1488551}
+  m_LocalRotation: {x: 0.65427583, y: -0.14742337, z: -0.72360617, w: 0.1630451}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 2.5400002, y: 2.5400002, z: 2.5400002}
   m_Children:
@@ -1436,7 +1830,7 @@ Transform:
   - {fileID: 197315481827692768}
   m_Father: {fileID: 197315481827692770}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -84.239, z: -154.604}
 --- !u!95 &197315481836764938
 Animator:
   serializedVersion: 3
@@ -1562,110 +1956,4 @@ SkinnedMeshRenderer:
   m_AABB:
     m_Center: {x: -0.14233887, y: -0.46173146, z: 0.014057517}
     m_Extent: {x: 1.2045087, y: 0.8366871, z: 0.6255576}
-  m_DirtyAABB: 0
---- !u!137 &197315481840992716
-SkinnedMeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197315481827396818}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 3
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 49293d1da7e26b845b39c24f9831eaba, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300004, guid: 20a4188340dcbe34fb937fada69ebd92, type: 3}
-  m_Bones:
-  - {fileID: 197315481827692784}
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 197315481827692784}
-  m_AABB:
-    m_Center: {x: -0.23183283, y: 0.0007855594, z: -0.010776937}
-    m_Extent: {x: 0.22360864, y: 0.05412219, z: 0.098473206}
-  m_DirtyAABB: 0
---- !u!137 &197315481840992718
-SkinnedMeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197315481827396828}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 3
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 49293d1da7e26b845b39c24f9831eaba, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300002, guid: 20a4188340dcbe34fb937fada69ebd92, type: 3}
-  m_Bones:
-  - {fileID: 197315481827692788}
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 197315481827692788}
-  m_AABB:
-    m_Center: {x: -0.5205226, y: 0.04022214, z: -0.0006351471}
-    m_Extent: {x: 0.17134649, y: 0.37420377, z: 0.29380342}
   m_DirtyAABB: 0
