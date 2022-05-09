@@ -11,14 +11,15 @@ public class hold : NetworkBehaviour
     public Behaviour[] a;
     public GameObject[] b;
     GameObject get;
+    public GameObject localplayer;
     void Start()
     {
         get = GameObject.FindGameObjectWithTag("Player");
 
-        if (!isLocalPlayer)
+        if (!localplayer.GetComponent<NetworkBehaviour>().isLocalPlayer)
         {
 
-            
+
             for (int i = 0; i < a.Length; i++)
             {
                 a[i].enabled = false;
@@ -33,14 +34,23 @@ public class hold : NetworkBehaviour
         {
 
             Camera Cam = GetComponentInChildren<Camera>(); ;
-            Cam.enabled = true;
-            get.SetActive(false);
+            if (Cam != null)
+            {
+                Cam.enabled = true;
+            }
+
+            if (get != null)
+            {
+                get.SetActive(false);
+            }
+            
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
+       
     }
 }
