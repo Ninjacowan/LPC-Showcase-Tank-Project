@@ -83,7 +83,6 @@ public class charB1Controls : MonoBehaviour
         DTG = col.bounds.extents.y;
         tredRenderer = GetComponentInChildren<Renderer>();
         boneTurretRotation = transform.Find("Root/connectBone001/TurretRotate");
-        offsetTurret = boneTurretRotation.localEulerAngles;
         start_angle = cameraY.transform.localRotation.eulerAngles.x;
     }
 
