@@ -12,7 +12,6 @@ public class charB1Controls : MonoBehaviour
     public GameObject bulletSpawner;
     public GameObject bullet_y;
     public Light tankLight;
-    public Light turretLight;
     public GameObject playerCrosshair;
     public GameObject turretCrosshair;
     public AudioSource engine;
@@ -84,7 +83,6 @@ public class charB1Controls : MonoBehaviour
         DTG = col.bounds.extents.y;
         tredRenderer = GetComponentInChildren<Renderer>();
         boneTurretRotation = transform.Find("Root/connectBone001/TurretRotate");
-        
         start_angle = cameraY.transform.localRotation.eulerAngles.x;
     }
 
@@ -206,14 +204,14 @@ public class charB1Controls : MonoBehaviour
         {
 
             transform.Rotate(0, (-turnStrength * Time.deltaTime), 0);
-            speedInput = speedInput / 1.2f;
+            speedInput = speedInput / 2;
             
         }
         else if (Input.GetKey(KeyCode.D) && IsGrouded())
         {
 
             transform.Rotate(0, (turnStrength * Time.deltaTime), 0);
-            speedInput = speedInput / 1.2f;
+            speedInput = speedInput / 2;
             
         }
         #endregion
@@ -226,22 +224,14 @@ public class charB1Controls : MonoBehaviour
                 tankLight.intensity = 0;
                 tankLight.GetComponent<MeshRenderer>().material = lightOFF;
                 lightActivated = false;
-
-                turretLight.intensity = 0;
-                turretLight.GetComponent<MeshRenderer>().material = lightOFF;
-                
             }
             else
             {
                 tankLight.intensity = lightIntensity;
                 tankLight.GetComponent<MeshRenderer>().material = lightON;
                 lightActivated = true;
-
-                turretLight.intensity = 10;
-                turretLight.GetComponent<MeshRenderer>().material = lightON;
             }
         }
-
         #endregion
 
         #region Turret Cannon
@@ -260,7 +250,7 @@ public class charB1Controls : MonoBehaviour
 
         #region User Interface
 
-        turretCrosshair.transform.position = new Vector3((-distance*6)+1029,turretCrosshair.transform.position.y,turretCrosshair.transform.position.z);
+        turretCrosshair.transform.position = new Vector3((-distance*6)+786,turretCrosshair.transform.position.y,turretCrosshair.transform.position.z);
         #endregion
         
         

@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/blowShitUp.unity
-    guid: 9bccbd24a9a7d554bac2c25042eb4dca
+    path: Assets/Scenes/Net test.unity
+    guid: 89b89c56a540d084d8245f23e51167fb
   m_configObjects: {}
