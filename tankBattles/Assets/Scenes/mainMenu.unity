@@ -856,7 +856,7 @@ MonoBehaviour:
   mainPosition: {fileID: 1592684501}
   playPosition: {fileID: 107862270}
   settingsPosition: {fileID: 525914351}
-  cameraSpeed: 10
+  cameraSpeed: 20
 --- !u!4 &219682933
 Transform:
   m_ObjectHideFlags: 0

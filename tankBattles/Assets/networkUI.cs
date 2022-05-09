@@ -9,7 +9,7 @@ public class networkUI : MonoBehaviour
     NetworkManager networkManager;
     public Button hostButton;
     public Button joinButton;
-    public InputField idInput;
+    public text idInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +25,12 @@ public class networkUI : MonoBehaviour
     }
     void Host()
     {
+        networkManager.maxConnections = 2;
         networkManager.StartHost();
     }
     void Join()
     {
+        networkManager.networkAddress = idInput.text;
         networkManager.StartClient();
     }
 }
