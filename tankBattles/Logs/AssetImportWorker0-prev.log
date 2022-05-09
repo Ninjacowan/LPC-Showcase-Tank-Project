@@ -18,12 +18,15 @@ Logs/AssetImportWorker0.log
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 54063
 Successfully changed project path to: C:/Users/roger/Documents/GitHub/LPC-Showcase-Tank-Project/tankBattles
 C:/Users/roger/Documents/GitHub/LPC-Showcase-Tank-Project/tankBattles
 Using Asset Import Pipeline V2.
 Refreshing native plugins compatible for Editor in 69.15 ms, found 2 plugins.
 =======
+=======
+>>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
@@ -43,6 +46,9 @@ Refreshing native plugins compatible for Editor in 36.17 ms, found 2 plugins.
 >>>>>>> Stashed changes
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
+=======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
@@ -66,8 +72,11 @@ Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/Mo
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56880
 =======
+=======
+>>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
@@ -108,6 +117,9 @@ Domain Reload Profiling:
 >>>>>>> Stashed changes
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
+=======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
@@ -121,9 +133,12 @@ Domain Reload Profiling:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		EndReloadAssembly (733ms)
 			LoadAssemblies (88ms)
 =======
+=======
+>>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
@@ -168,6 +183,9 @@ Domain Reload Profiling:
 >>>>>>> Stashed changes
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
+=======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
@@ -182,8 +200,11 @@ Registering precompiled user dll's ...
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Registered in 0.007340 seconds.
 =======
+=======
+>>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
@@ -1800,6 +1821,9 @@ Start importing Assets/Char_B1/Materials/red glow.mat using Guid(c6462036aedb29c
 ========================================================================
 Received Import Request.
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
+=======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
 =======
 >>>>>>> 9c8207a8fa3f210ec8ddebf610dd69bdb77bce41
