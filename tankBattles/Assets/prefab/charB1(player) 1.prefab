@@ -190,7 +190,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!1 &2263534329966827951
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +446,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!1 &6200885002022944842
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +897,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7148754734781759125}
     m_Modifications:
+    - target: {fileID: 1936597584602305144, guid: e95497135e0d3a042b4b0ace8ffbe95f, type: 3}
+      propertyPath: m_Drag
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 2659240438386590896, guid: e95497135e0d3a042b4b0ace8ffbe95f, type: 3}
       propertyPath: m_AssetId.i0
       value: 0
@@ -1473,6 +1477,18 @@ PrefabInstance:
       propertyPath: m_AssetId.i15
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6572846614581501801, guid: e95497135e0d3a042b4b0ace8ffbe95f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7962264
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572846614581501801, guid: e95497135e0d3a042b4b0ace8ffbe95f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.989738
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572846614581501801, guid: e95497135e0d3a042b4b0ace8ffbe95f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6825188471188176728, guid: e95497135e0d3a042b4b0ace8ffbe95f, type: 3}
       propertyPath: cameraY
       value: 
@@ -1481,6 +1497,22 @@ PrefabInstance:
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 262606412639234385}
+    - target: {fileID: 6825188471188176728, guid: e95497135e0d3a042b4b0ace8ffbe95f, type: 3}
+      propertyPath: maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825188471188176728, guid: e95497135e0d3a042b4b0ace8ffbe95f, type: 3}
+      propertyPath: forwardAccel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825188471188176728, guid: e95497135e0d3a042b4b0ace8ffbe95f, type: 3}
+      propertyPath: reverseAccel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825188471188176728, guid: e95497135e0d3a042b4b0ace8ffbe95f, type: 3}
+      propertyPath: turnStrength
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6825188471188176728, guid: e95497135e0d3a042b4b0ace8ffbe95f, type: 3}
       propertyPath: playerCrosshair
       value: 

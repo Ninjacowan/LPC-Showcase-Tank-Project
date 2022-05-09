@@ -13,6 +13,9 @@ public class buttonManager : MonoBehaviour
     public Button settingsButton;
     public Button backSettingsButton;
     public Button backPlayButton;
+    public Button hostButton;
+    public Button joinButton;
+    public GameObject addressInput;
     #endregion
 
     #region Positions
@@ -38,6 +41,9 @@ public class buttonManager : MonoBehaviour
     private GameObject temp3;
     private GameObject temp4;
     private GameObject temp5;
+    private GameObject temp6;
+    private GameObject temp7;
+    private GameObject temp8;
     #endregion
     
     void Start()
@@ -47,8 +53,13 @@ public class buttonManager : MonoBehaviour
         temp3 = GameObject.Find("exitButton");
         temp4 = GameObject.Find("backButtonSettings");
         temp5 = GameObject.Find("backButtonPlay");
+        temp6 = GameObject.Find("joinButton");
+        temp7 = GameObject.Find("hostButton");
         temp4.SetActive(false);
         temp5.SetActive(false);
+        temp6.SetActive(false);
+        temp7.SetActive(false);
+        addressInput.SetActive(false);
     }
 
     
@@ -152,13 +163,18 @@ public class buttonManager : MonoBehaviour
         temp1.SetActive(val);
         temp2.SetActive(val);
         temp3.SetActive(val);
+        
     }
     void playButtons(bool val)
     {
         temp5.SetActive(val);
+        temp6.SetActive(val);
+        temp7.SetActive(val);
+        addressInput.SetActive(val);
     }
     void settingsButtons(bool val)
     {
+        
         temp4.SetActive(val);
     }
 }

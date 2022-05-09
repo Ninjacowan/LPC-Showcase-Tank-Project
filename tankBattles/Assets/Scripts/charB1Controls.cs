@@ -204,14 +204,14 @@ public class charB1Controls : MonoBehaviour
         {
 
             transform.Rotate(0, (-turnStrength * Time.deltaTime), 0);
-            speedInput = speedInput / 2;
+            speedInput = speedInput / 1.1f;
             
         }
         else if (Input.GetKey(KeyCode.D) && IsGrouded())
         {
 
             transform.Rotate(0, (turnStrength * Time.deltaTime), 0);
-            speedInput = speedInput / 2;
+            speedInput = speedInput / 1.1f;
             
         }
         #endregion
