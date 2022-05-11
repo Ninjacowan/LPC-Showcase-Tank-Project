@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
+    public bool debugging;
     public GameObject shell;
     public GameObject explosionSpawner;
     public AudioSource sound;
@@ -25,6 +26,11 @@ public class bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (debugging)
+        {
+            Debug.Log(collision.gameObject.name);
+        }
+        
         Vector3 explosionPos = transform.position;
         GameObject Explosion = Instantiate(explosionSpawner,explosionPos,Quaternion.identity);
         Rigidbody rb = Explosion.GetComponent<Rigidbody>();

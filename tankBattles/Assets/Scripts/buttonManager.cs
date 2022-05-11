@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Networking;
 
 public class buttonManager : MonoBehaviour
 {
+    public NetworkManager NetworkManager;
+    public bool debugging;
     public Camera mainCamera;
     #region Buttons
     public Button startButton;
@@ -60,9 +63,18 @@ public class buttonManager : MonoBehaviour
         temp6.SetActive(false);
         temp7.SetActive(false);
         addressInput.SetActive(false);
+
+        //NetworkManager = FindObjectOfType<NetworkManager>();
+    }
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;    // set to default default
+        Cursor.lockState = CursorLockMode.None; // keep confined in the game window
+        Cursor.lockState = CursorLockMode.None;   // keep confined to center of screen
+        
     }
 
-    
+
     void Update()
     {
         startButton.onClick.AddListener(startTask);
@@ -70,6 +82,8 @@ public class buttonManager : MonoBehaviour
         backSettingsButton.onClick.AddListener(backTaskS);
         exitButton.onClick.AddListener(endTask);
         backPlayButton.onClick.AddListener(backTaskP);
+        //hostButton.onClick.AddListener(Host);
+        //joinButton.onClick.AddListener(Join);
 
         if (startButtonSelected)
         {
@@ -176,6 +190,36 @@ public class buttonManager : MonoBehaviour
     {
         
         temp4.SetActive(val);
+    }
+    void Host()
+    {
+        if (debugging)
+        {
+            Debug.Log("host button");
+        }
+        NetworkManager.maxConnections = 2;
+        try
+        {
+            NetworkManager.StartHost();
+        }
+        catch
+        {
+
+        }
+        
+    }
+    void Join()
+    {
+        if (debugging)
+        {
+            Debug.Log("join button");
+        }
+        try
+        {
+            NetworkManager.StartClient();
+        }
+        catch { }
+        
     }
 }
 

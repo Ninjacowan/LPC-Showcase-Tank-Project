@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class charB1Controls : MonoBehaviour
 {
     #region Game Objects
+    public NetworkManager NetworkManager;
     public GameObject cameraController;
     public GameObject cameraY;
     public GameObject turret;
@@ -16,7 +20,8 @@ public class charB1Controls : MonoBehaviour
     public GameObject turretCrosshair;
     public AudioSource engine;
     public AudioSource cannon;
-    public UnityEngine.UI.Text healthUI; 
+    public UnityEngine.UI.Text healthUI;
+    public Light turretLight;
     #endregion
 
     #region Public Variables
@@ -84,6 +89,10 @@ public class charB1Controls : MonoBehaviour
         tredRenderer = GetComponentInChildren<Renderer>();
         boneTurretRotation = transform.Find("Root/connectBone001/TurretRotate");
         start_angle = cameraY.transform.localRotation.eulerAngles.x;
+    }
+    private void Awake()
+    {
+        NetworkManager = FindObjectOfType<NetworkManager>();
     }
 
     // Update is called once per frame
@@ -222,20 +231,24 @@ public class charB1Controls : MonoBehaviour
             if (lightActivated)
             {
                 tankLight.intensity = 0;
+                turretLight.intensity = 0;
                 tankLight.GetComponent<MeshRenderer>().material = lightOFF;
+                turretLight.GetComponent<MeshRenderer>().material = lightOFF;
                 lightActivated = false;
             }
             else
             {
                 tankLight.intensity = lightIntensity;
+                turretLight.intensity = 6;
                 tankLight.GetComponent<MeshRenderer>().material = lightON;
+                turretLight.GetComponent<MeshRenderer>().material = lightON;
                 lightActivated = true;
             }
         }
         #endregion
 
         #region Turret Cannon
-        if (Input.GetMouseButtonDown(0)&& Time.time > nextFire)
+        /*if (Input.GetMouseButtonDown(0)&& Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             Vector3 spawn = new Vector3(bulletSpawner.transform.position.x, bullet_y.transform.position.y, bulletSpawner.transform.position.z);
@@ -245,12 +258,12 @@ public class charB1Controls : MonoBehaviour
             Rigidbody rig = cBullet.GetComponent<Rigidbody>();
             rig.AddForce(cBullet.transform.forward * intialBulletSpeed);
 
-        }
+        }*/
         #endregion
 
         #region User Interface
 
-        turretCrosshair.transform.position = new Vector3((-distance*6)+786,turretCrosshair.transform.position.y,turretCrosshair.transform.position.z);
+        turretCrosshair.transform.position = new Vector3((-distance*6)+1029,turretCrosshair.transform.position.y,turretCrosshair.transform.position.z);
         #endregion
         
         
@@ -273,6 +286,14 @@ public class charB1Controls : MonoBehaviour
             
         }
         healthUI.text = health.ToString();
+        if (health <= 0)
+        {
+            Destroy(gameObject, 8);
+            NetworkManager.client.Disconnect();
+            NetworkManager.client.Shutdown();
+            //SceneManager.LoadScene("mainMenu");
+            
+        }
 
 
     }
@@ -286,8 +307,8 @@ public class charB1Controls : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-     
-        if (collision.gameObject.name == "bullet")
+        
+        if (collision.gameObject.name == "bullet"|| collision.gameObject.name == "bullet(Clone)")
         {
             health = health-damage;
 

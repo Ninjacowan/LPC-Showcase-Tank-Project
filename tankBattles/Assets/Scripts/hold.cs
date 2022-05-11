@@ -10,16 +10,15 @@ public class hold : NetworkBehaviour
     [SerializeField]
     public Behaviour[] a;
     public GameObject[] b;
-    GameObject get;
-    public GameObject localplayer;
+    public GameObject get;
     void Start()
     {
-        get = GameObject.FindGameObjectWithTag("Player");
+        
 
-        if (!localplayer.GetComponent<NetworkBehaviour>().isLocalPlayer)
+        if (!get.GetComponentInChildren<NetworkBehaviour>().isLocalPlayer)
         {
 
-
+            
             for (int i = 0; i < a.Length; i++)
             {
                 a[i].enabled = false;
@@ -33,24 +32,14 @@ public class hold : NetworkBehaviour
         else
         {
 
-            Camera Cam = GetComponentInChildren<Camera>(); ;
-            if (Cam != null)
-            {
-                Cam.enabled = true;
-            }
-
-            if (get != null)
-            {
-                get.SetActive(false);
-            }
-            
+           
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-       
+        
+        
     }
 }

@@ -9,13 +9,18 @@ public class networkUI : MonoBehaviour
     NetworkManager networkManager;
     public Button hostButton;
     public Button joinButton;
-    public text idInput;
+    public bool debuging;
+    
     // Start is called before the first frame update
     void Start()
     {
-        networkManager = GetComponent<NetworkManager>();
+        hostButton.Equals(GameObject.Find("hostButton"));
         hostButton.onClick.AddListener(Host);
+        joinButton.Equals(GameObject.Find("joinButton"));
         joinButton.onClick.AddListener(Join);
+
+        networkManager = GetComponent<NetworkManager>();
+        
     }
 
     // Update is called once per frame
@@ -25,12 +30,19 @@ public class networkUI : MonoBehaviour
     }
     void Host()
     {
+        if (debuging)
+        {
+            Debug.Log("host button");
+        }
         networkManager.maxConnections = 2;
         networkManager.StartHost();
     }
     void Join()
     {
-        networkManager.networkAddress = idInput.text;
+        if (debuging)
+        {
+            Debug.Log("join button");
+        }
         networkManager.StartClient();
     }
 }
