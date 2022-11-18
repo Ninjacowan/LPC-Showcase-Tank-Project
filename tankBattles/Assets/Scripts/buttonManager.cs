@@ -5,20 +5,24 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Networking;
 
+
 public class buttonManager : MonoBehaviour
 {
     public NetworkManager NetworkManager;
     public bool debugging;
     public Camera mainCamera;
-    #region Buttons
+    #region Buttons   
     public Button startButton;
     public Button exitButton;
     public Button settingsButton;
     public Button backSettingsButton;
     public Button backPlayButton;
-    public Button hostButton;
-    public Button joinButton;
-    public GameObject addressInput;
+    //public Button hostButton;
+    //public Button joinButton;
+    //public Text addressInput;
+    public GameObject[] settingMenuElements;
+    public GameObject[] startMenuElements;
+    public GameObject[] playMenuElements;
     #endregion
 
     #region Positions
@@ -39,44 +43,56 @@ public class buttonManager : MonoBehaviour
     private bool backSettingsButtonSelected;
     private bool backPlayButtonSelected;
 
-    private GameObject temp1;
-    private GameObject temp2;
-    private GameObject temp3;
-    private GameObject temp4;
-    private GameObject temp5;
-    private GameObject temp6;
-    private GameObject temp7;
-    private GameObject temp8;
+    
     #endregion
     
     void Start()
     {
-        temp1 = GameObject.Find("startButton");
-        temp2 = GameObject.Find("settingsButton");
-        temp3 = GameObject.Find("exitButton");
-        temp4 = GameObject.Find("backButtonSettings");
-        temp5 = GameObject.Find("backButtonPlay");
-        temp6 = GameObject.Find("joinButton");
-        temp7 = GameObject.Find("hostButton");
-        temp4.SetActive(false);
-        temp5.SetActive(false);
-        temp6.SetActive(false);
-        temp7.SetActive(false);
-        addressInput.SetActive(false);
+        
+        
+        settingsButtons(false);
+        playButtons(false);
+        
 
-        //NetworkManager = FindObjectOfType<NetworkManager>();
+        
     }
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.None;    // set to default default
         Cursor.lockState = CursorLockMode.None; // keep confined in the game window
         Cursor.lockState = CursorLockMode.None;   // keep confined to center of screen
-        
+        NetworkManager = FindObjectOfType<NetworkManager>();
     }
 
 
     void Update()
     {
+        /*if (hostButton == null)
+        {
+            try
+            {
+                hostButton = GameObject.Find("hostButton").GetComponent<Button>();
+            }
+            catch
+            { }
+
+        }
+        else
+        {
+            hostButton.onClick.AddListener(Host);
+        }
+        if (joinButton == null)
+        {
+            try
+            {
+                joinButton = GameObject.Find("joinButton").GetComponent<Button>();
+            }
+            catch { }
+        }
+        else
+        {
+            joinButton.onClick.AddListener(Join);
+        }*/
         startButton.onClick.AddListener(startTask);
         settingsButton.onClick.AddListener(settingsTask);
         backSettingsButton.onClick.AddListener(backTaskS);
@@ -174,38 +190,44 @@ public class buttonManager : MonoBehaviour
     }
     void mainButtons(bool val)
     {
-        temp1.SetActive(val);
-        temp2.SetActive(val);
-        temp3.SetActive(val);
+        for(int i = 0; i < startMenuElements.Length; i++)
+        {
+            startMenuElements[i].SetActive(val);
+        }
         
     }
     void playButtons(bool val)
     {
-        temp5.SetActive(val);
-        temp6.SetActive(val);
-        temp7.SetActive(val);
-        addressInput.SetActive(val);
+        for(int i = 0; i < playMenuElements.Length; i++)
+        {
+            playMenuElements[i].SetActive(val);
+        }
     }
     void settingsButtons(bool val)
     {
-        
-        temp4.SetActive(val);
+        for(int i = 0; i < settingMenuElements.Length; i++)
+        {
+            settingMenuElements[i].SetActive(val);
+        }
     }
-    void Host()
+
+    /*void Host()
     {
         if (debugging)
         {
             Debug.Log("host button");
         }
         NetworkManager.maxConnections = 2;
-        try
+        if(addressInput.ToString().Length < 4)
         {
-            NetworkManager.StartHost();
+            NetworkManager.networkPort =  int.Parse(addressInput.ToString());
         }
-        catch
+        else
         {
-
+            NetworkManager.networkPort = 7777;
         }
+        ConnectionConfig defaultConfig = NetworkManager.connectionConfig;
+        NetworkManager.StartHost(defaultConfig, 2);
         
     }
     void Join()
@@ -214,12 +236,16 @@ public class buttonManager : MonoBehaviour
         {
             Debug.Log("join button");
         }
-        try
+        if(addressInput.ToString().Length < 4)
         {
-            NetworkManager.StartClient();
+            NetworkManager.networkPort =  int.Parse(addressInput.ToString());
         }
-        catch { }
+        else
+        {
+            NetworkManager.networkPort = 7777;
+        }
         
     }
+    */
 }
 

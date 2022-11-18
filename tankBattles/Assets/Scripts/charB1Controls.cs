@@ -4,10 +4,18 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Sirenix.OdinInspector;
 
 public class charB1Controls : MonoBehaviour
 {
     #region Game Objects
+    [TabGroup("Tank Movement")]
+    [Header("Drive Controls")]
+    [TabGroup("Tank Movement")] public float forwardAccel = 6f;
+    [TabGroup("Tank Movement")] public float reverseAccel = 6f;
+    [TabGroup("Tank Movement")] public float maxSpeed = 50f;
+    [TabGroup("Light Controls")]
+    
     public NetworkManager NetworkManager;
     public GameObject cameraController;
     public GameObject cameraY;
@@ -25,9 +33,8 @@ public class charB1Controls : MonoBehaviour
     #endregion
 
     #region Public Variables
-    public float forwardAccel = 6f;
-    public float reverseAccel = 6f;
-    public float maxSpeed = 50f;
+    
+    
     public float turnStrength;
     public float TreadRotationRate = 3f;
     public float maxGroundDistance = 4f;
@@ -71,9 +78,10 @@ public class charB1Controls : MonoBehaviour
     Transform boneTurretCannon;
     Rigidbody theRB;
     TextEditor textEditor;
-    
-    
+
+
     #endregion
+    
 
 
     // Start is called before the first frame update
@@ -198,6 +206,7 @@ public class charB1Controls : MonoBehaviour
         if (speedInput > maxSpeed)
         {
             speedInput = maxSpeed;
+            
         }
         else if (speedInput < -maxSpeed/1.1)
         {
@@ -226,6 +235,7 @@ public class charB1Controls : MonoBehaviour
         #endregion
 
         #region Flashlight
+        /*
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (lightActivated)
@@ -244,7 +254,7 @@ public class charB1Controls : MonoBehaviour
                 turretLight.GetComponent<MeshRenderer>().material = lightON;
                 lightActivated = true;
             }
-        }
+        } */
         #endregion
 
         #region Turret Cannon
@@ -263,7 +273,7 @@ public class charB1Controls : MonoBehaviour
 
         #region User Interface
 
-        turretCrosshair.transform.position = new Vector3((-distance*6)+1029,turretCrosshair.transform.position.y,turretCrosshair.transform.position.z);
+        turretCrosshair.transform.position = new Vector3((-distance*6)+970,turretCrosshair.transform.position.y,turretCrosshair.transform.position.z);
         #endregion
         
         
@@ -281,16 +291,13 @@ public class charB1Controls : MonoBehaviour
         {
             theRB.AddForce(theRB.transform.forward * speedInput);
         }
-        else
-        {
-            
-        }
+       
         healthUI.text = health.ToString();
         if (health <= 0)
         {
-            Destroy(gameObject, 8);
-            NetworkManager.client.Disconnect();
-            NetworkManager.client.Shutdown();
+            
+            //NetworkManager.client.Disconnect();
+            NetworkManager.StopHost();
             //SceneManager.LoadScene("mainMenu");
             
         }

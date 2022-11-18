@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using System;
 
 public class networkUI : MonoBehaviour
 {
@@ -14,28 +15,66 @@ public class networkUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hostButton.Equals(GameObject.Find("hostButton"));
-        hostButton.onClick.AddListener(Host);
-        joinButton.Equals(GameObject.Find("joinButton"));
+   if(hostButton == null)
+        {
+            try
+            {
+                hostButton = GameObject.Find("hostButton").GetComponent<Button>();
+            }
+            catch
+            { }
+            
+        }
+        else
+        {
+            
+        }
+        if(joinButton == null)
+        {
+            try
+            {
+                joinButton = GameObject.Find("joinButton").GetComponent<Button>();
+            }
+            catch { }
+        }
+        else
+        {
+            
+        }
+        DontDestroyOnLoad(joinButton);
+        DontDestroyOnLoad(hostButton);
         joinButton.onClick.AddListener(Join);
-
+        hostButton.onClick.AddListener(Host);
         networkManager = GetComponent<NetworkManager>();
-        
+
     }
 
     // Update is called once per frame
+    
     void Update()
     {
         
+     
     }
     void Host()
     {
-        if (debuging)
+       
+        bool noConnection = (networkManager.client == null || networkManager.client.connection == null ||
+               networkManager.client.connection.connectionId == -1);
+
+        if (!networkManager.IsClientConnected() && !NetworkServer.active && networkManager.matchMaker == null)
         {
-            Debug.Log("host button");
+            if (noConnection)
+            {
+
+
+                networkManager.maxConnections = 2;
+              
+                    networkManager.StartHost();
+              
+            }
         }
-        networkManager.maxConnections = 2;
-        networkManager.StartHost();
+        
     }
     void Join()
     {
@@ -43,6 +82,13 @@ public class networkUI : MonoBehaviour
         {
             Debug.Log("join button");
         }
-        networkManager.StartClient();
+        try
+        {
+            networkManager.StartClient();
+        }
+        catch (Exception a)
+        {
+
+        }
     }
 }
