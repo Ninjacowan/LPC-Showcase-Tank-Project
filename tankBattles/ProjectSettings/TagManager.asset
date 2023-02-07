@@ -7,6 +7,9 @@ TagManager:
   - Hit
   - music
   - joinButton
+  - Flag_Red
+  - Flag_Blue
+  - Flag_Green
   layers:
   - Default
   - TransparentFX
@@ -14,11 +17,11 @@ TagManager:
   - ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Hidden Light
+  - Player 1 Light
+  - Player 2 Light
+  - Player 3 Light
+  - Flare
   - 
   - 
   - 
