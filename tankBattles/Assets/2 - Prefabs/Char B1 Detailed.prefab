@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 3764290817125175302}
   - component: {fileID: 2134448538920163723}
   - component: {fileID: 5578534754191040944}
+  - component: {fileID: 5637432165316242437}
   - component: {fileID: 8331088138233898170}
   - component: {fileID: 2220339694620479801}
   - component: {fileID: 5281803079535520875}
@@ -208,7 +209,6 @@ GameObject:
   - component: {fileID: 8425379380511670515}
   - component: {fileID: 6457185071392659993}
   - component: {fileID: 3896190705764052931}
-  - component: {fileID: 5637432165316242437}
   m_Layer: 0
   m_Name: Char B1 Detailed
   m_TagString: Untagged
@@ -370,6 +370,23 @@ MonoBehaviour:
   IsLocalPlayer: 0
   lightActive: 0
   brightness: 6
+--- !u!114 &5637432165316242437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709559240040753847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75bff5564586bfa4f82b8521f8934d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  leaderRect: {fileID: 7813975600406319513}
+  redKillCounter: {fileID: 4654414507872209497}
+  blueKillCounter: {fileID: 1061987338817964918}
+  greenKillCounter: {fileID: 367499810332867165}
 --- !u!114 &8331088138233898170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,23 +602,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5637432165316242437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709559240040753847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75bff5564586bfa4f82b8521f8934d74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  leaderRect: {fileID: 7813975600406319513}
-  redKillCounter: {fileID: 4654414507872209497}
-  blueKillCounter: {fileID: 1061987338817964918}
-  greenKillCounter: {fileID: 367499810332867165}
 --- !u!1 &1025060078142977356
 GameObject:
   m_ObjectHideFlags: 0
@@ -33993,7 +33993,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6313474248102488743}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.0624, y: -0.0001, z: -0}
+  m_LocalPosition: {x: 0.0791, y: -0.0001, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5041178933678467530}
@@ -39246,7 +39246,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7697008784120053155}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.1303, y: 0.05027, z: -0.016}
+  m_LocalPosition: {x: 0.1441, y: 0.05027, z: -0.016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2644645364534663506}

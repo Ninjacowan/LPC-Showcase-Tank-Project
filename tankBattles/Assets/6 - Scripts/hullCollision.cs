@@ -8,11 +8,16 @@ public class hullCollision : MonoBehaviour
 {
     [PreviewField]public tankControlOverhaul controls;
     [PreviewField] public KillCounter killCounter;
+    [PreviewField] public gameManager gameManager;
     public GameObject tank;
     public bool debug = false;
     public bool killAdded = false;
     public bullet projectile;
-    
+    private void Start()
+    {
+        gameManager = FindObjectOfType<gameManager>(true);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "bullet" || collision.gameObject.name == "bullet(Clone)")
@@ -20,8 +25,7 @@ public class hullCollision : MonoBehaviour
             projectile = collision.gameObject.GetComponent<bullet>();
             projectile.tag = collision.gameObject.tag;
             if (debug) { Debug.Log(projectile.tag); }
-            controls.health -= 25;
-            if(controls.health == 0)
+            if(killCounter.AddDamage(controls.tankColor.name, 25))
             {
                 int r = 0;
                 int g = 0;

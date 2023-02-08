@@ -9678,9 +9678,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 49ad1666e7fccc3499b40a86c18f24ea, type: 2}
   playerCount: 0
   players: []
+  redHealth: 100
+  greenHealth: 100
+  blueHealth: 100
   redKills: 0
-  blueKills: 0
   greenKills: 0
+  blueKills: 0
 --- !u!114 &1615360615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9712,7 +9715,7 @@ MonoBehaviour:
     i13: 0
     i14: 0
     i15: 0
-  m_ServerOnly: 0
+  m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!1001 &1620550616
 PrefabInstance:

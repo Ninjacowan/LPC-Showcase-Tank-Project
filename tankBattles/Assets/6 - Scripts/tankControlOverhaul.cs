@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class tankControlOverhaul : NetworkBehaviour
 {
-
     #region Variables
     [Title("Player Stats")]
     public Material tankColor;
@@ -94,7 +93,7 @@ public class tankControlOverhaul : NetworkBehaviour
     Collision lastCollision;
     private void Awake()
     {
-        networkManager = FindObjectOfType<NetworkManager>();
+        networkManager = FindObjectOfType<NetworkManager>(true);
 
     }
     void Start()
@@ -102,7 +101,7 @@ public class tankControlOverhaul : NetworkBehaviour
         visor.enabled = false;
         adjustedSensitivity = sensitivity;
         adjustedRotationSpeed = rotationSpeed;
-        gameManager = FindObjectOfType<gameManager>();
+        gameManager = FindObjectOfType<gameManager>(true);
         gameManager.players.Add(this);
         tankColor = gameManager.colors[gameManager.players.Count - 1];
         Material[] mats = flag.materials;
@@ -113,15 +112,13 @@ public class tankControlOverhaul : NetworkBehaviour
         tredRenderer = GetComponentInChildren<Renderer>();
         //Debug.Log("Half of Screen Height: "+Screen.height / 2);
         turretBarrel.rotation.SetEulerAngles(270, turretBarrel.rotation.eulerAngles.y, turretBarrel.rotation.eulerAngles.z);
-        deathArea = GameObject.Find("Game Manager").transform;
+        deathArea = FindObjectOfType<gameManager>(true).transform;
         hiddenPos = GameObject.Find("hiddenPos").transform;
 
         
     }
     void Update()
     {
-        CmdUpdateHealth(health);
-        //Debug.Log(IsGrounded());
         isTouchingGround=IsGrounded();
         forwardInput = Input.GetAxis("Vertical");
         if (Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.C))
@@ -140,15 +137,12 @@ public class tankControlOverhaul : NetworkBehaviour
             visor.enabled = false;
         }
 
-        if(health > 100)
-        {
-            health = 100;
-        }
         needle.eulerAngles = new Vector3(0, 0, (100 - health) * 2.67f + 133);
 
         //Draws the ray that checks to see if the tank is grounded
         Vector3 forward = tankBody.transform.TransformDirection(-Vector3.up) * maxGroundDistance;
         Debug.DrawRay(tankBody.transform.position + new Vector3(0.0f, 1.0f, 0.0f), forward, Color.green);
+        UpdateHealth(tankColor.name);
         if (isAlive)
         {
             if (!lockCamera)
@@ -290,7 +284,6 @@ public class tankControlOverhaul : NetworkBehaviour
             **/
             #endregion
 
-            #region Barrel Elevation
             adjustedPosition = playerCrosshair.transform.position.y / 10 - 45;
             relativePlayerCrosshairPos = playerCrosshair.transform.position.y + adjusted;
             if (eulerUnits)
@@ -325,19 +318,6 @@ public class tankControlOverhaul : NetworkBehaviour
             if(Mathf.Abs(distance) < 1)
             turretBarrel.transform.localEulerAngles = new Vector3(turretBarrel.localEulerAngles.x, turretBarrel.localEulerAngles.y, adjustedBarrelElevation-5);
             meterIndicator.localPosition = new Vector3(meterIndicator.localPosition.x, adjustedBarrelElevation * help2 - help, 0);
-            //Debug.Log(adjustedBarrelElevation);
-            #endregion
-
-            #region Firing Mechanism (Disabled)
-            /**
-            if (Input.GetMouseButtonDown(0) && Time.time > nextFire)
-            {
-                nextFire = Time.time + fireRate;
-                Shoot();
-
-            }
-            **/
-            #endregion
         }
         else
         {
@@ -345,7 +325,6 @@ public class tankControlOverhaul : NetworkBehaviour
             cameraController.transform.position = deathArea.position;
             cameraController.transform.rotation = deathArea.rotation;
             canvas.enabled = false;
-            //tankBody.active = false;
             tankBody.transform.position = hiddenPos.position;
             lockCamera = true;
             shootScript.enabled = false;
@@ -355,8 +334,6 @@ public class tankControlOverhaul : NetworkBehaviour
                 int i = Random.Range(0, gameManager.spawnPoints.Count);
                 tankBody.transform.position = gameManager.spawnPoints[i].position;
                 tankBody.transform.rotation = gameManager.spawnPoints[i].rotation;
-                //this.transform.position = gameManager.spawnPoints[i].position;
-                //this.transform.rotation = gameManager.spawnPoints[i].rotation;
                 cameraController.transform.position = gameManager.spawnPoints[i].position;
                 cameraController.transform.rotation = gameManager.spawnPoints[i].rotation;
                 shootScript.enabled = true;
@@ -364,16 +341,27 @@ public class tankControlOverhaul : NetworkBehaviour
                 tankBody.active = true;
                 lockCamera = false;
                 isAlive = true;
-                health = 100;
             }
             
         }
-
         engineAudioSource.volume = Mathf.Abs(Input.GetAxis("Vertical"))/10 + .1f; ;
         if (engineAudioSource.volume > .4f)
         {
             engineAudioSource.volume = .4f;
         }
+        /**
+        if (health <= 0 && isAlive)
+        {
+
+            respawnTime = Time.time + cooldown;
+            isAlive = false;
+            Vector3 explosionPos = tankBody.transform.position;
+            GameObject Explosion = Instantiate(explosion, explosionPos, Quaternion.identity);
+            Destroy(Explosion, 1.5f);
+
+
+        }
+        **/
 
     }
     bool IsGrounded()
@@ -404,53 +392,80 @@ public class tankControlOverhaul : NetworkBehaviour
             health = 0;
         }
         healthUI.text = health.ToString();
-        if (health <= 0&&isAlive)
-        {
-            
-            respawnTime = Time.time+cooldown;
-            isAlive = false;
-            Vector3 explosionPos = tankBody.transform.position;
-            GameObject Explosion = Instantiate(explosion,explosionPos, Quaternion.identity);
-            Destroy(Explosion, 1.5f);
-
-
-        }
-    }
-    
-    private void OnCollisionEnter(Collision collision)
-    {
-        /**
-        Debug.Log(collision.gameObject.name);
-
-        if (collision.gameObject.name == "bullet" || collision.gameObject.name == "bullet(Clone)")
-        {
-            bullet projectile = collision.gameObject.GetComponent<bullet>();
-            health = health - projectile.damage;
-            projectile.damage=projectile.damage-10;
-            Debug.Log("Ouch bowser");
-
-        }
-        lastCollision = collision;
-        **/
+        
     }
     private Color GetHealthBarColor(float value)
     {
         return Color.Lerp(Color.red, Color.green, Mathf.Pow(value / 100f, 2));
     }
-    void Shoot() 
+    
+    public void UpdateHealth(string color)
     {
-        Vector3 spawn = new Vector3(bulletSpawner.transform.position.x, bulletY.transform.position.y, bulletSpawner.transform.position.z);
-        cannonAudio.Play();
-        GameObject cBullet = Instantiate(bulletPrefab, spawn, Quaternion.identity);
-        cBullet.transform.rotation = bulletSpawner.transform.rotation;
-        Rigidbody rig = cBullet.GetComponent<Rigidbody>();
-        rig.AddForce(cBullet.transform.forward * intialBulletSpeed);
-        //NetworkServer.Spawn(cBullet);
+        if (isServer)
+        {
+            RpcUpdateHealth(color);
+        }
+        else
+        {
+            CmdUpdateHealth(color);
+        }
     }
     [Command]
-    public void CmdUpdateHealth(float Health)
+    private void CmdUpdateHealth(string color)
     {
-        health = Health;
+        if (color == "Flag_Red")
+        {
+            health = gameManager.redHealth;
+        }
+        else if (color == "Flag_Green")
+        {
+            health = gameManager.greenHealth;
+        }
+        else if (color == "Flag_Blue")
+        {
+            health = gameManager.blueHealth;
+        }
     }
-}
+    [ClientRpc]
+    private void RpcUpdateHealth(string color)
+    {
 
+        if (color == "Flag_Red")
+        {
+            health = gameManager.redHealth;
+        }
+        else if (color == "Flag_Green")
+        {
+            health = gameManager.greenHealth;
+        }
+        else if (color == "Flag_Blue")
+        {
+            health = gameManager.blueHealth;
+        }
+    }
+    /**
+    public bool TakeDamage(int damage)
+    {
+        if (isServer)
+        {
+            return RpcTakeDamage(damage);
+        }
+        else
+        {
+            return CmdTakeDamage(damage);
+        }
+    }
+    private bool CmdTakeDamage(int damage)
+    {
+        health -= damage;
+        UpdateHealth(health);
+        return health == 0;
+    }
+    private bool RpcTakeDamage(int damage)
+    {
+        health -= damage;
+        UpdateHealth(health);
+        return health == 0;
+    }
+    **/
+}

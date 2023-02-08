@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
-
+using Sirenix.OdinInspector;
 public class leaderboard : NetworkBehaviour
 {
     public gameManager gameManager;
@@ -11,10 +11,14 @@ public class leaderboard : NetworkBehaviour
     public Text redKillCounter;
     public Text blueKillCounter;
     public Text greenKillCounter;
+
+    [ReadOnly] public bool IsServer;
+    [ReadOnly] public bool IsClient;
+    [ReadOnly] public bool IsLocalPlayer;
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<gameManager>();
+        gameManager = FindObjectOfType<gameManager>(true);
         blueKillCounter.gameObject.SetActive(false);
         greenKillCounter.gameObject.SetActive(false);
         leaderRect.SetActive(false);
@@ -23,7 +27,10 @@ public class leaderboard : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameManager.playerCount > 1)
+        IsServer = isServer;
+        IsClient = isClient;
+        IsLocalPlayer = isLocalPlayer;
+        if (gameManager.playerCount > 1)
         {
             blueKillCounter.gameObject.SetActive(true);
         }

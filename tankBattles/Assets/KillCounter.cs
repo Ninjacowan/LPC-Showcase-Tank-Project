@@ -13,7 +13,7 @@ public class KillCounter : NetworkBehaviour
 
     void Start()
     {
-        gameManager = FindObjectOfType<gameManager>();
+        gameManager = FindObjectOfType<gameManager>(true);
     }
     void Update()
     {
@@ -36,13 +36,34 @@ public class KillCounter : NetworkBehaviour
     }
 
     [Command]
-    public void CmdUpdateKills(int r, int g, int b)
+    private void CmdUpdateKills(int r, int g, int b)
     {
         gameManager.UpdateKillCounter(r, g, b);
     }
     [ClientRpc]
-    public void RpcClientUpdateKills(int r, int g, int b)
+    private void RpcClientUpdateKills(int r, int g, int b)
     {
         gameManager.UpdateKillCounter(r, g, b);
+    }
+    public bool AddDamage(string color, int damage)
+    {
+        if (isServer)
+        {
+            return RpcAddDamage(color, damage);
+        }
+        else
+        {
+            return CmdAddKills(color, damage);
+        }
+    }
+    [Command]
+    private bool CmdAddKills(string color, int damage)
+    {
+        return gameManager.AddDamage(color, damage);
+    }
+    [ClientRpc]
+    private bool RpcAddDamage(string color, int damage)
+    {
+        return gameManager.AddDamage(color, damage);
     }
 }
