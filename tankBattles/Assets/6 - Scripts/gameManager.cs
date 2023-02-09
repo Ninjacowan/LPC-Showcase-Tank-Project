@@ -84,17 +84,32 @@ public class gameManager : NetworkBehaviour
     [ClientRpc]
     private void RpcUpdateRedHealth()
     {
-        redHealth = redHealth;
+        players[0].UpdateHealth("Flag_Red");
     }
     [ClientRpc]
     private void RpcUpdateBlueHealth()
     {
-        blueHealth = blueHealth;
+        try
+        {
+            players[1].UpdateHealth("Flag_Blue");
+        }
+        catch
+        {
+
+        }
+        
     }
     [ClientRpc]
     private void RpcUpdateGreenHealth()
     {
-        greenHealth = greenHealth;
+        try
+        {
+            players[2].UpdateHealth("Flag_Green");
+        }
+        catch
+        {
+
+        }
     }
     
     
