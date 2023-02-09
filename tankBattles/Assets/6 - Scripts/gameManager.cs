@@ -12,9 +12,9 @@ public class gameManager : NetworkBehaviour
     public List<Material> colors;
     [ReadOnly] public int playerCount = 0;
     [ReadOnly] public List<tankControlOverhaul> players;
-    [Range(0, 100), SyncVar, OnValueChanged("RpcUpdateRedHealth")] public float redHealth = 100;
-    [Range(0, 100), SyncVar, OnValueChanged("RpcUpdateGreenHealth")] public float greenHealth = 100;
-    [Range(0, 100), SyncVar, OnValueChanged("RpcUpdateBlueHealth")] public float blueHealth = 100;
+    [Range(0, 100)] public float redHealth = 100;
+    [Range(0, 100)] public float greenHealth = 100;
+    [Range(0, 100)] public float blueHealth = 100;
     [SyncVar] public int redKills = 0;
     [SyncVar] public int greenKills = 0;
     [SyncVar] public int blueKills = 0;
@@ -25,13 +25,14 @@ public class gameManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        networkManager = FindObjectOfType<NetworkManager>(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerCount=players.Count;
+        playerCount = networkManager.numPlayers;
+        RpcUpdateAllHealth();
     }
 
     public void UpdateKillCounter(int r, int g, int b)
@@ -82,35 +83,24 @@ public class gameManager : NetworkBehaviour
         }
     }
     [ClientRpc]
-    private void RpcUpdateRedHealth()
+    private void RpcUpdateAllHealth()
     {
-        players[0].UpdateHealth("Flag_Red");
-    }
-    [ClientRpc]
-    private void RpcUpdateBlueHealth()
-    {
+        players[0].health = redHealth;
         try
         {
-            players[1].UpdateHealth("Flag_Blue");
+            players[1].health = blueHealth;
         }
         catch
         {
 
         }
-        
-    }
-    [ClientRpc]
-    private void RpcUpdateGreenHealth()
-    {
         try
         {
-            players[2].UpdateHealth("Flag_Green");
+            players[2].health = greenHealth;
         }
         catch
         {
 
         }
     }
-    
-    
 }

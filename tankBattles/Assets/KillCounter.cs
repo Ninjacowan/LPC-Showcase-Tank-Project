@@ -49,21 +49,23 @@ public class KillCounter : NetworkBehaviour
     {
         if (isServer)
         {
-            return RpcAddDamage(color, damage);
+            RpcAddDamage(color, damage);
         }
         else
         {
-            return CmdAddKills(color, damage);
+            CmdAddKills(color, damage);
         }
+        return false;
     }
+    //ADD RETURNS
     [Command]
-    private bool CmdAddKills(string color, int damage)
+    private void CmdAddKills(string color, int damage)
     {
-        return gameManager.AddDamage(color, damage);
+        gameManager.AddDamage(color, damage);
     }
     [ClientRpc]
-    private bool RpcAddDamage(string color, int damage)
+    private void RpcAddDamage(string color, int damage)
     {
-        return gameManager.AddDamage(color, damage);
+        gameManager.AddDamage(color, damage);
     }
 }

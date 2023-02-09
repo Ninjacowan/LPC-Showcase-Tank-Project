@@ -413,6 +413,7 @@ public class tankControlOverhaul : NetworkBehaviour
     [Command]
     private void CmdUpdateHealth(string color)
     {
+        Debug.Log("Command Update Health, Color: " + color + " r: " + gameManager.redHealth + " b:" + gameManager.blueHealth);
         if (color == "Flag_Red")
         {
             health = gameManager.redHealth;
@@ -429,7 +430,7 @@ public class tankControlOverhaul : NetworkBehaviour
     [ClientRpc]
     private void RpcUpdateHealth(string color)
     {
-
+        Debug.Log("ClientRPC Update Health, Color: " + color + " r: " + gameManager.redHealth + " b:" + gameManager.blueHealth);
         if (color == "Flag_Red")
         {
             health = gameManager.redHealth;
