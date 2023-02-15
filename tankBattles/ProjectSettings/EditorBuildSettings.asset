@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/1 - Scenes/mainMenu.unity
     guid: cd2cabb332b2578419f0aa76e568a9f4
   - enabled: 0
-    path: Assets/1 - Scenes/nightCity.unity
+    path: 
     guid: 4bfc75640bfe7d649934afdd7befb874
   - enabled: 1
     path: Assets/1 - Scenes/City2.unity
     guid: 977f0a95a3046794b896918296d1bd16
+  - enabled: 1
+    path: Assets/1 - Scenes/Physics Testing.unity
+    guid: 45ba076c13608ad43b9323d7e02e8cc9
   m_configObjects: {}

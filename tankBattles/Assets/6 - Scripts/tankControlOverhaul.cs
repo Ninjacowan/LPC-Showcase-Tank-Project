@@ -9,6 +9,7 @@ public class tankControlOverhaul : NetworkBehaviour
 {
     #region Variables
     [Title("Player Stats")]
+    public bool isTesting = false;
     public Material tankColor;
     public SkinnedMeshRenderer flag;
     [ProgressBar(0, 100, 0, 1, 0, Height = 30, ColorGetter = "GetHealthBarColor")] public float health = 100f;
@@ -37,9 +38,9 @@ public class tankControlOverhaul : NetworkBehaviour
     [Title("Movement")]
     [LabelText("Rigid Body"), InlineEditor(InlineEditorModes.GUIAndHeader)] public Rigidbody theRB;
     [InlineEditor(InlineEditorModes.LargePreview)] public GameObject tankBody;
-    [TabGroup("Tank Movement", true), Range(0, 10), LabelText("Forward Acceleration")] public float forwardAcc;
-    [TabGroup("Tank Movement"), Range(0, 10), LabelText("Reverse Acceleration")] public float reverseAcc;
-    [TabGroup("Tank Movement"), LabelText("Maximum Speed"), MinMaxSlider(-500000, 500000, true)] public Vector2 maxSpeed;
+    [TabGroup("Tank Movement", true), Range(0, 20), LabelText("Forward Acceleration")] public float forwardAcc;
+    [TabGroup("Tank Movement"), Range(0, 20), LabelText("Reverse Acceleration")] public float reverseAcc;
+    [TabGroup("Tank Movement"), LabelText("Maximum Speed"), MinMaxSlider(-10, 10, true)] public Vector2 maxSpeed;
     [TabGroup("Tank Movement"), Range(0, 50)] public float turnStrength;
     [TabGroup("Tank Movement"), Range(0, 10), LabelText("Maximum Distance from Ground")] public float maxGroundDistance;
     [TabGroup("Tank Movement")] public bool isTouchingGround;
@@ -94,16 +95,18 @@ public class tankControlOverhaul : NetworkBehaviour
     private void Awake()
     {
         networkManager = FindObjectOfType<NetworkManager>(true);
+        
 
     }
     void Start()
     {
+        
         visor.enabled = false;
         adjustedSensitivity = sensitivity;
         adjustedRotationSpeed = rotationSpeed;
         gameManager = FindObjectOfType<gameManager>(true);
-        gameManager.players.Add(this);
-        tankColor = gameManager.colors[gameManager.players.Count - 1];
+        //FIXME gameManager.players.Add(this);
+        //FIXME tankColor = gameManager.colors[gameManager.players.Count - 1];
         Material[] mats = flag.materials;
         mats[0] = tankColor;
         flag.materials = mats;
@@ -142,7 +145,7 @@ public class tankControlOverhaul : NetworkBehaviour
         //Draws the ray that checks to see if the tank is grounded
         Vector3 forward = tankBody.transform.TransformDirection(-Vector3.up) * maxGroundDistance;
         Debug.DrawRay(tankBody.transform.position + new Vector3(0.0f, 1.0f, 0.0f), forward, Color.green);
-        UpdateHealth(tankColor.name);
+        //UpdateHealth(tankColor.name);
         if (isAlive)
         {
             if (!lockCamera)
@@ -197,40 +200,34 @@ public class tankControlOverhaul : NetworkBehaviour
             speedInput = 0;
             if (Input.GetKey(KeyCode.W)&&IsGrounded())
             {
-                if (tredRenderer.enabled)
+                float var;
+                Vector2 uvAnimationRate = new Vector2(treadRotationRate, 0.0f);
+                if (theRB.velocity.z < theRB.velocity.x)
                 {
-                    float var;
-                    Vector2 uvAnimationRate = new Vector2(treadRotationRate, 0.0f);
-                    if (theRB.velocity.z < theRB.velocity.x)
-                    {
-                        var = theRB.velocity.x;
-                    }
-                    else
-                    {
-                        var = theRB.velocity.z;
-                    }
-                    uvOffset += (uvAnimationRate * Time.deltaTime * (var / 12));
-                    tredRenderer.material.mainTextureOffset = uvOffset;
+                     var = theRB.velocity.x;
                 }
+                else
+                {
+                     var = theRB.velocity.z;
+                }
+                uvOffset += (uvAnimationRate * Time.deltaTime * (var / 12));
+                tredRenderer.material.mainTextureOffset = uvOffset;
                 speedInput = Input.GetAxis("Vertical") * forwardAcc * 100000;
             }
             else if (Input.GetKey(KeyCode.S) && IsGrounded())
             {
-                if (tredRenderer.enabled)
+                float var;
+                Vector2 uvAnimationRate = new Vector2(treadRotationRate, 0.0f);
+                if (theRB.velocity.z < theRB.velocity.x)
                 {
-                    float var;
-                    Vector2 uvAnimationRate = new Vector2(treadRotationRate, 0.0f);
-                    if (theRB.velocity.z < theRB.velocity.x)
-                    {
-                        var = theRB.velocity.z;
-                    }
-                    else
-                    {
-                        var = theRB.velocity.x;
-                    }
-                    uvOffset += (uvAnimationRate * Time.deltaTime * (var / 12));
-                    tredRenderer.material.mainTextureOffset = uvOffset;
+                    var = theRB.velocity.z;
                 }
+                else
+                {
+                    var = theRB.velocity.x;
+                }
+                uvOffset += (uvAnimationRate * Time.deltaTime * (var / 12));
+                tredRenderer.material.mainTextureOffset = uvOffset;
                 speedInput = Input.GetAxis("Vertical") * reverseAcc * 100000f;
             }
 
@@ -247,14 +244,6 @@ public class tankControlOverhaul : NetworkBehaviour
                 tankBody.transform.Rotate(0, (turnStrength * Time.deltaTime), 0);
                 theRB.velocity = theRB.velocity / 1.001f;
 
-            }
-            if (speedInput > maxSpeed.y)
-            {
-                speedInput = maxSpeed.y;
-            }
-            else if (speedInput < maxSpeed.x)
-            {
-                speedInput = maxSpeed.x;
             }
             #endregion
 
@@ -284,6 +273,7 @@ public class tankControlOverhaul : NetworkBehaviour
             **/
             #endregion
 
+            #region Barrel Elevation
             adjustedPosition = playerCrosshair.transform.position.y / 10 - 45;
             relativePlayerCrosshairPos = playerCrosshair.transform.position.y + adjusted;
             if (eulerUnits)
@@ -317,6 +307,8 @@ public class tankControlOverhaul : NetworkBehaviour
             }
             if(Mathf.Abs(distance) < 1)
             turretBarrel.transform.localEulerAngles = new Vector3(turretBarrel.localEulerAngles.x, turretBarrel.localEulerAngles.y, adjustedBarrelElevation-5);
+            #endregion
+
             meterIndicator.localPosition = new Vector3(meterIndicator.localPosition.x, adjustedBarrelElevation * help2 - help, 0);
         }
         else
@@ -375,14 +367,14 @@ public class tankControlOverhaul : NetworkBehaviour
         
         if (Mathf.Abs(speedInput) > 0&&isAlive)
         {
-            if (theRB.velocity.magnitude < 3.5)
+            if (theRB.velocity.magnitude < maxSpeed.y)
             {
                 theRB.AddForce(theRB.transform.right * speedInput);
             }
         }
         else if(Mathf.Abs(speedInput) < 0 &&isAlive)
         {
-            if (theRB.velocity.magnitude < 3.5)
+            if (theRB.velocity.magnitude < maxSpeed.x)
             {
                 theRB.AddForce(theRB.transform.right * speedInput);
             }
